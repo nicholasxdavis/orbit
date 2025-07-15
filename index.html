@@ -117,97 +117,121 @@
             </button>
         </header>
 
-        <div id="app-content" class="max-w-4xl mx-auto animate-fade-up hidden" style="animation-delay: 0.1s">
-            <div class="bg-dark-secondary/60 glassmorphism p-8 rounded-3xl shadow-xl z-[10] border-2 border-[#fcfcfc]/40">
-                <div id="workspace-connector" class="mb-12 text-center">
-                    <h2 class="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Your Workspace</h2>
-                    <p class="mb-8 text-dark-tertiary">Link your Google Account to enable the AI-powered tools.</p>
-                    <div id="google-services-icons" class="flex justify-center items-center gap-4 md:gap-8 flex-wrap">
-                        <a href="#" class="service-icon-link text-center no-underline" data-service="docs">
-                            <div class="service-icon transition-all duration-300 cursor-pointer">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/47px-Google_Docs_logo_%282014-2020%29.svg.png?20220322143607" alt="Google Docs" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Docs';">
-                            </div>
-                            <p class="mt-2 text-sm text-dark-tertiary">Docs</p>
-                        </a>
-                        <a href="#" class="service-icon-link text-center no-underline" data-service="sheets">
-                            <div class="service-icon transition-all duration-300 cursor-pointer">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Google_Sheets_logo_%282014-2020%29.svg/49px-Google_Sheets_logo_%282014-2020%29.svg.png?20201024100414" alt="Google Sheets" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Sheets';">
-                            </div>
-                            <p class="mt-2 text-sm text-dark-tertiary">Sheets</p>
-                        </a>
-                        <a href="#" class="service-icon-link text-center no-underline" data-service="slides">
-                            <div class="service-icon transition-all duration-300 cursor-pointer">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Google_Slides_logo_%282014-2020%29.svg/48px-Google_Slides_logo_%282014-2020%29.svg.png?20201024100433" alt="Google Slides" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Slides';">
-                            </div>
-                            <p class="mt-2 text-sm text-dark-tertiary">Slides</p>
-                        </a>
-                        <a href="#" class="service-icon-link text-center no-underline" data-service="forms">
-                            <div class="service-icon transition-all duration-300 cursor-pointer">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Google_Forms_logo_%282014-2020%29.svg/48px-Google_Forms_logo_%282014-2020%29.svg.png?20201024102621" alt="Google Forms" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Forms';">
-                            </div>
-                            <p class="mt-2 text-sm text-dark-tertiary">Forms</p>
-                        </a>
-                        <a href="#" class="service-icon-link text-center no-underline" data-service="email">
-                            <div class="service-icon transition-all duration-300 cursor-pointer">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/64px-Gmail_icon_%282020%29.svg.png" alt="Gmail" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Gmail';">
-                            </div>
-                            <p class="mt-2 text-sm text-dark-tertiary">Email</p>
-                        </a>
+<div id="app-content" class="max-w-4xl mx-auto animate-fade-up hidden" style="animation-delay: 0.1s">
+    <div class="bg-dark-secondary/60 glassmorphism p-8 rounded-3xl shadow-xl z-[10] border-2 border-[#fcfcfc]/40">
+        <div id="workspace-connector" class="mb-12 text-center">
+            <h2 class="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Your Workspace</h2>
+            <p class="mb-8 text-dark-tertiary">Link your accounts to enable the AI-powered tools.</p>
+            <div id="google-services-icons" class="flex justify-center items-center gap-4 md:gap-8 flex-wrap">
+                <a href="#" class="service-icon-link text-center no-underline" data-service="docs">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/47px-Google_Docs_logo_%282014-2020%29.svg.png?20220322143607" alt="Google Docs" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Docs';">
                     </div>
-                </div>
-            </div>
-            
-            <div class="bg-dark-secondary/60 mt-16 glassmorphism p-8 rounded-3xl shadow-xl z-[10] border-2 border-[#fcfcfc]/40">
-              <div id="wc" class="mb-12">
-                <h2 class="text-3xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Powerful Features</h2>
-                <p class="mb-8 text-dark-tertiary text-center">Link your Google Account to enable the AI-powered tools.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                        <div class="w-12 h-12  rounded-lg flex items-center justify-center">
-                            <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold">Cross-Platform Generation</h3>
-                        <p class="text-dark-tertiary text-sm">Create documents, spreadsheets, presentations, and forms instantly with AI assistance across all Google Workspace tools.</p>
+                    <p class="mt-2 text-sm text-dark-tertiary">Docs</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="sheets">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Google_Sheets_logo_%282014-2020%29.svg/49px-Google_Sheets_logo_%282014-2020%29.svg.png?20201024100414" alt="Google Sheets" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Sheets';">
                     </div>
-                    <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center">
-                            <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold">Smart Formatting</h3>
-                        <p class="text-dark-tertiary text-sm">Automatically structure and format your content with AI-powered templates for each platform.</p>
+                    <p class="mt-2 text-sm text-dark-tertiary">Sheets</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="slides">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Google_Slides_logo_%282014-2020%29.svg/48px-Google_Slides_logo_%282014-2020%29.svg.png?20201024100433" alt="Google Slides" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Slides';">
                     </div>
-                    <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                        <div class="w-12 h-12  rounded-lg flex items-center justify-center">
-                            <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"></path></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold">Data Analysis</h3>
-                        <p class="text-dark-tertiary text-sm">Transform raw data into insights with AI-powered spreadsheet formulas and visualization tools.</p>
+                    <p class="mt-2 text-sm text-dark-tertiary">Slides</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="forms">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Google_Forms_logo_%282014-2020%29.svg/48px-Google_Forms_logo_%282014-2020%29.svg.png?20201024102621" alt="Google Forms" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Forms';">
                     </div>
-                    <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                        <div class="w-12 h-12  rounded-lg flex items-center justify-center">
-                            <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold">Presentation Design</h3>
-                        <p class="text-dark-tertiary text-sm">Create stunning slides with automatic layout suggestions and design recommendations.</p>
+                    <p class="mt-2 text-sm text-dark-tertiary">Forms</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="email">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/64px-Gmail_icon_%282020%29.svg.png" alt="Gmail" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Gmail';">
                     </div>
-                    <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                        <div class="w-12 h-12  rounded-lg flex items-center justify-center">
-                            <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold">Secure Cloud Sync</h3>
-                        <p class="text-dark-tertiary text-sm">All your work is automatically saved and synced across Google Workspace platforms.</p>
+                    <p class="mt-2 text-sm text-dark-tertiary">Email</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="mybusiness">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Google_My_Business_Logo.svg/512px-Google_My_Business_Logo.svg.png" alt="Google My Business" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=GMB';">
                     </div>
-                    <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                        <div class="w-12 h-12  rounded-lg flex items-center justify-center">
-                            <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h3 class="text-lg font-semibold">Email Automation</h3>
-                        <p class="text-dark-tertiary text-sm">Generate professional emails and responses with AI, directly from your Gmail.</p>
+                    <p class="mt-2 text-sm text-dark-tertiary">My Business</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="reddit">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bd/Reddit_Logo_Icon.svg/512px-Reddit_Logo_Icon.svg.png" alt="Reddit" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Reddit';">
                     </div>
-                </div>
-              </div>
+                    <p class="mt-2 text-sm text-dark-tertiary">Reddit</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="discord">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Discord_logo_wordmark_violet.svg/512px-Discord_logo_wordmark_violet.svg.png" alt="Discord" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Discord';">
+                    </div>
+                    <p class="mt-2 text-sm text-dark-tertiary">Discord</p>
+                </a>
+                <a href="#" class="service-icon-link text-center no-underline" data-service="linkedin">
+                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/480px-LinkedIn_logo_initials.png" alt="LinkedIn" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=LinkedIn';">
+                    </div>
+                    <p class="mt-2 text-sm text-dark-tertiary">LinkedIn</p>
+                </a>
             </div>
         </div>
+    </div>
+
+    <div class="bg-dark-secondary/60 mt-16 glassmorphism p-8 rounded-3xl shadow-xl z-[10] border-2 border-[#fcfcfc]/40">
+        <div id="wc" class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Powerful Features</h2>
+            <p class="mb-8 text-dark-tertiary text-center">Link your accounts to enable the AI-powered tools.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold">Cross-Platform Generation</h3>
+                    <p class="text-dark-tertiary text-sm">Create documents, spreadsheets, presentations, and forms instantly with AI assistance across all Google Workspace tools.</p>
+                </div>
+                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold">Smart Formatting</h3>
+                    <p class="text-dark-tertiary text-sm">Automatically structure and format your content with AI-powered templates for each platform.</p>
+                </div>
+                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold">Data Analysis</h3>
+                    <p class="text-dark-tertiary text-sm">Transform raw data into insights with AI-powered spreadsheet formulas and visualization tools.</p>
+                </div>
+                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold">Presentation Design</h3>
+                    <p class="text-dark-tertiary text-sm">Create stunning slides with automatic layout suggestions and design recommendations.</p>
+                </div>
+                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold">Secure Cloud Sync</h3>
+                    <p class="text-dark-tertiary text-sm">All your work is automatically saved and synced across Google Workspace platforms.</p>
+                </div>
+                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold">Email Automation</h3>
+                    <p class="text-dark-tertiary text-sm">Generate professional emails and responses with AI, directly from your Gmail.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="auth-prompt" class="text-center p-10  backdrop-blur-lg rounded-3xl  max-w-md mx-auto animate-fade-up ">
     <div class="w-24 h-24 mx-auto mb-6 rounded-[2rem] bg-gradient-to-br from-cyan-400 to-blue-400/50 flex items-center justify-center shadow-lg">
         <img src="https://nicholasxdavis.github.io/docs/img/logo-white.png" alt="Orbit Logo" class="w-14 h-14">
