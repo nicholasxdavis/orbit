@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit - Reddit Tool</title>
+    
+    <link rel="icon" href="https://nicholasxdavis.github.io/docs/img/orbit.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../javascript/tailwind-config.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body { background-color: #161618; color: #fcfcfc; }
+        .glassmorphism { background: rgba(22, 22, 24, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(36, 38, 40, 0.5); }
+        .btn-micro:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(6, 178, 252, 0.3); }
+        .hidden { display: none; }
+        .custom-textarea { background: #242628; border: 1px solid #3a3c3e; transition: all 0.3s ease; }
+        .custom-textarea:focus { border-color: #50b1f7; box-shadow: 0 0 0 2px rgba(6, 178, 252, 0.2); }
+        .toggle-checkbox:checked { right: 0; border-color: #06b2fc; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #06b2fc; }
+        .loader { width: 50px; aspect-ratio: 1; box-shadow: 0 0 0 3px #06b2fc inset; border-radius: 50%; position: relative; animation: l6 1.5s linear infinite; }
+        .loader:before { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); box-shadow: inherit; width: 25px; aspect-ratio: 1; border-radius: 50%; }
+        @keyframes l6 { to { transform: rotate(360deg); } }
+        .post-card { transition: all 0.2s ease; }
+        .post-card:hover { transform: translateY(-2px); background: rgba(36, 38, 40, 0.8); }
+        .upvote { color: #ff4500; }
+        .comment { color: #949494; }
+        .post-flair { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 9999px; background: rgba(255, 69, 0, 0.1); color: #ff4500; }
+        .compose-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: rgba(0, 0, 0, 0.8); 
+            z-index: 1000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            animation: fade-in 0.3s ease-out;
+        }
+        .compose-container {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-dark-primary text-dark-light min-h-screen">
+    <!-- Compose Post Overlay (hidden by default) -->
+    <div id="compose-overlay" class="compose-overlay hidden">
+        <div class="compose-container">
+            <div class="glassmorphism p-8 rounded-2xl shadow-xl relative">
+                <button id="close-compose" class="absolute top-4 right-4 text-dark-tertiary hover:text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+                
+                <div id="post-generator">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-400">Create Reddit Post</h2>
+                        <p class="text-dark-tertiary">Use the form below to compose and post to Reddit with AI assistance.</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label for="post-subreddit" class="block text-sm font-medium text-dark-tertiary mb-2">Subreddit</label>
+                            <input type="text" id="post-subreddit" placeholder="e.g., r/AskReddit" class="w-full p-3 bg-dark-secondary border border-dark-tertiary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#06b2fc] text-dark-light placeholder-dark-tertiary">
+                        </div>
+                        <div>
+                            <label for="post-title" class="block text-sm font-medium text-dark-tertiary mb-2">Title</label>
+                            <input type="text" id="post-title" placeholder="Post title" class="w-full p-3 bg-dark-secondary border border-dark-tertiary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#06b2fc] text-dark-light placeholder-dark-tertiary">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="post-content" class="block text-sm font-medium text-dark-tertiary">Content</label>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-dark-tertiary">AI Formatting</span>
+                                    <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                        <input type="checkbox" id="ai-format-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                        <label for="ai-format-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <textarea id="post-content" rows="12" placeholder="Write your post content here, or describe what you want to post and use the AI to generate it..." class="w-full p-4 custom-textarea rounded-lg focus:outline-none text-dark-light placeholder-dark-tertiary resize-none"></textarea>
+                        </div>
+                        <div>
+                            <label for="post-flair" class="block text-sm font-medium text-dark-tertiary mb-2">Flair (optional)</label>
+                            <input type="text" id="post-flair" placeholder="e.g., Discussion, Question" class="w-full p-3 bg-dark-secondary border border-dark-tertiary rounded-lg focus:outline-none focus:ring-2 focus:ring-[#06b2fc] text-dark-light placeholder-dark-tertiary">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                        <button id="ai-enhance-btn" class="flex-1 bg-[#06b2fc] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#0595d8] transition-all transform btn-micro flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                            <span>Enhance with AI</span>
+                        </button>
+                        <button id="submit-post-btn" class="flex-1 bg-gradient-to-r from-orange-400 to-red-300 text-white font-semibold py-3 px-6 rounded-lg hover:from-orange-300 hover:to-red-200 transition-all transform btn-micro flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                            <span>Submit Post</span>
+                        </button>
+                    </div>
+                    <p id="generator-status" class="mt-4 text-center h-5 text-sm"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply Overlay (hidden by default) -->
+    <div id="reply-overlay" class="compose-overlay hidden">
+        <div class="compose-container">
+            <div class="glassmorphism p-8 rounded-2xl shadow-xl relative">
+                <button id="close-reply" class="absolute top-4 right-4 text-dark-tertiary hover:text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+                
+                <div id="reply-generator">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-400">Reply to Post</h2>
+                        <p class="text-dark-tertiary">Use the form below to compose your reply with AI assistance.</p>
+                    </div>
+                    
+                    <div id="reply-context" class="bg-dark-secondary rounded-lg p-4 mb-6 border border-dark-tertiary/20">
+                        <h3 id="reply-post-title" class="font-medium mb-2"></h3>
+                        <p id="reply-post-content" class="text-sm text-dark-tertiary"></p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="reply-content" class="block text-sm font-medium text-dark-tertiary">Reply Content</label>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-dark-tertiary">AI Formatting</span>
+                                    <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                        <input type="checkbox" id="ai-reply-format-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                        <label for="ai-reply-format-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <textarea id="reply-content" rows="12" placeholder="Write your reply here, or describe what you want to say and use the AI to generate it..." class="w-full p-4 custom-textarea rounded-lg focus:outline-none text-dark-light placeholder-dark-tertiary resize-none"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                        <button id="ai-enhance-reply-btn" class="flex-1 bg-[#06b2fc] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#0595d8] transition-all transform btn-micro flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                            <span>Enhance with AI</span>
+                        </button>
+                        <button id="submit-reply-btn" class="flex-1 bg-gradient-to-r from-orange-400 to-red-300 text-white font-semibold py-3 px-6 rounded-lg hover:from-orange-300 hover:to-red-200 transition-all transform btn-micro flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd"></path></svg>
+                            <span>Submit Reply</span>
+                        </button>
+                    </div>
+                    <p id="reply-status" class="mt-4 text-center h-5 text-sm"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard Content -->
+    <div class="container mx-auto px-4 md:px-8 py-6">
+        <header class="flex justify-between items-center mb-8 animate-fade-up">
+            <div class="flex items-center gap-3">
+                <img src="https://nicholasxdavis.github.io/docs/img/logo.png" alt="Orbit Logo" class="w-20 h-100%">
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="../../" class="bg-dark-secondary text-dark-light font-medium py-2 px-4 rounded-lg hover:bg-dark-light/10 transition-all flex items-center gap-2 btn-micro">
+                    &larr; Back to Workspace
+                </a>
+                <button id="open-compose" class="bg-gradient-to-r from-[#ff4500] to-[#ff8b60] text-white font-medium py-2 px-4 rounded-lg hover:opacity-90 transition-all flex items-center gap-2 btn-micro">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path></svg>
+                    <span>New Post</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="app-content" class="hidden animate-fade-up" style="animation-delay: 0.1s">
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Total Karma</p>
+                            <h3 id="karma-count" class="text-2xl font-bold">--</h3>
+                        </div>
+                        <div class="bg-[#ff4500]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#ff4500]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Posts</p>
+                            <h3 id="posts-count" class="text-2xl font-bold">--</h3>
+                        </div>
+                        <div class="bg-[#06b2fc]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#06b2fc]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Comments</p>
+                            <h3 id="comments-count" class="text-2xl font-bold">--</h3>
+                        </div>
+                        <div class="bg-[#10b981]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#10b981]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Unread Messages</p>
+                            <h3 id="unread-count" class="text-2xl font-bold">--</h3>
+                        </div>
+                        <div class="bg-[#f59e0b]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#f59e0b]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="glassmorphism p-6 rounded-xl">
+                    <h3 class="font-semibold mb-4">Engagement (7 days)</h3>
+                    <canvas id="engagementChart" height="250"></canvas>
+                </div>
+                
+                <div class="glassmorphism p-6 rounded-xl">
+                    <h3 class="font-semibold mb-4">Top Subreddits</h3>
+                    <canvas id="subredditChart" height="250"></canvas>
+                </div>
+            </div>
+            
+            <!-- Activity Analyzer -->
+            <div class="glassmorphism p-6 rounded-xl mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold">AI Activity Analyzer</h3>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-dark-tertiary">Analyze last</span>
+                        <select id="analyze-period" class="bg-dark-secondary text-dark-light text-sm rounded px-2 py-1">
+                            <option value="1">24 hours</option>
+                            <option value="7">7 days</option>
+                            <option value="30">30 days</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <button id="analyze-summary-btn" class="bg-[#06b2fc] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#0595d8] transition-all">
+                        Summary Report
+                    </button>
+                    <button id="analyze-trends-btn" class="bg-[#ff4500] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#e03e00] transition-all">
+                        Identify Trends
+                    </button>
+                    <button id="analyze-actions-btn" class="bg-[#10b981] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#0d9e6e] transition-all">
+                        Action Items
+                    </button>
+                </div>
+                
+                <div class="bg-dark-secondary rounded-lg p-4 min-h-48">
+                    <div id="analyzer-placeholder" class="text-center text-dark-tertiary py-12">
+                        <svg class="w-12 h-12 mx-auto mb-3 text-[#ff4500]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                        <p>Select an analysis option above to generate insights</p>
+                    </div>
+                    <div id="analyzer-results" class="hidden">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 id="analysis-title" class="font-medium"></h4>
+                            <button id="copy-analysis-btn" class="text-[#06b2fc] hover:underline text-sm flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <div id="analysis-content" class="prose prose-invert max-w-none text-sm"></div>
+                    </div>
+                    <div id="analyzer-loading" class="hidden text-center py-12">
+                        <div class="loader mx-auto"></div>
+                        <p class="mt-4 text-[#ff4500]">Analyzing activity...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Recent Posts -->
+                <div class="glassmorphism p-6 rounded-xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-semibold">Recent Posts</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-dark-tertiary">Filter:</span>
+                            <select id="posts-filter" class="bg-dark-secondary text-dark-light text-sm rounded px-2 py-1">
+                                <option value="all">All</option>
+                                <option value="top">Top</option>
+                                <option value="new">New</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="posts-list" class="space-y-3">
+                        <div class="text-center py-12 text-dark-tertiary">
+                            <p>Loading posts...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Comments -->
+                <div class="glassmorphism p-6 rounded-xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-semibold">Recent Comments</h3>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-dark-tertiary">Filter:</span>
+                            <select id="comments-filter" class="bg-dark-secondary text-dark-light text-sm rounded px-2 py-1">
+                                <option value="all">All</option>
+                                <option value="top">Top</option>
+                                <option value="new">New</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="comments-list" class="space-y-3">
+                        <div class="text-center py-12 text-dark-tertiary">
+                            <p>Loading comments...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Inbox -->
+            <div class="glassmorphism p-6 rounded-xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold">Inbox</h3>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-dark-tertiary">Filter:</span>
+                        <select id="inbox-filter" class="bg-dark-secondary text-dark-light text-sm rounded px-2 py-1">
+                            <option value="all">All</option>
+                            <option value="unread">Unread</option>
+                            <option value="mentions">Mentions</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="inbox-list" class="space-y-3">
+                    <div class="text-center py-12 text-dark-tertiary">
+                        <p>Loading messages...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="auth-prompt" class="hidden text-center p-10 mt-16">
+            <h2 class="text-2xl font-bold mb-4">Authentication Required</h2>
+            <p class="mb-6 text-dark-tertiary">Please sign in and connect your Reddit Account from the main workspace to use this tool.</p>
+            <a href="../../" class="bg-[#ff4500] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#e03e00] transition-all">
+                Go to Workspace
+            </a>
+        </div>
+    </div>
+
+    <div id="loading-skeleton" class="fixed inset-0 bg-dark-primary/90 z-[2000] flex items-center justify-center">
+        <div class="loader"></div>
+    </div>
+
+    <script src="../../javascript/tools/reddit.js"></script>
+</body>
+</html>
