@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orbit - Docs Tool</title>
-
+    
    <link rel="icon" href="https://nicholasxdavis.github.io/docs/img/orbit.png" type="image/png">
-
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../javascript/tailwind-config.js"></script>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    
     <style>
         body { background-color: #161618; color: #fcfcfc; }
         .glassmorphism { background: rgba(22, 22, 24, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(36, 38, 40, 0.5); }
@@ -45,7 +47,7 @@
                         <h2 class="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-400">Create New Document</h2>
                         <p class="text-dark-tertiary">Use the form below to generate a new Google Doc with AI.</p>
                     </div>
-
+                    
                     <div class="space-y-6">
                         <div>
                             <label for="doc-title" class="block text-sm font-medium text-dark-tertiary mb-2">Document Title</label>
@@ -92,8 +94,6 @@
     </div>
 
     <script src="../../javascript/tools/docs.js"></script>
-    
-    <script async defer src="https://apis.google.com/js/api.js" onload="startApp()"></script>
 
 </body>
 </html>
