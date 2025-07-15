@@ -9,7 +9,8 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const GOOGLE_API_KEY = deobfuscate('A*I*z*a*S*y*A*U*I*v*4*H*E*M*u*f*F*0*x*5*1*e*Z*q*L*p*e*o*R*t*J*X*8*W*n*r*n*i*o');
 const DISCOVERY_DOCS = [
-    "https://mybusiness.googleapis.com/$discovery/rest?version=v4",
+    "https://businessprofileperformance.googleapis.com/$discovery/rest?version=v1",
+    "https://mybusinessbusinessinformation.googleapis.com/$discovery/rest?version=v1",
     "https://mybusinessaccountmanagement.googleapis.com/$discovery/rest?version=v1"
 ];
 
@@ -19,7 +20,7 @@ const DEFAULT_MODEL = 'moonshotai/kimi-k2:free';
 
 // Global variables
 let currentUser = null;
-let gmbClient = null;
+let businessProfileClient = null;
 let ratingChart = null;
 let trendChart = null;
 let businessLocations = [];
@@ -90,13 +91,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             gapi.client.setToken({ access_token: googleToken });
-            gmbClient = gapi.client.mybusiness;
+            businessProfileClient = gapi.client.businessprofileperformance;
 
             // Load business locations
             const accountsResponse = await gapi.client.mybusinessaccountmanagement.accounts.list();
             if (accountsResponse.result.accounts && accountsResponse.result.accounts.length > 0) {
                 const accountName = accountsResponse.result.accounts[0].name;
-                const locationsResponse = await gapi.client.mybusiness.locations.list({ parent: accountName });
+                const locationsResponse = await businessProfileClient.locations.list({ 
+                    parent: accountName,
+                    readMask: 'name,title,metadata'
+                });
+                
                 businessLocations = locationsResponse.result.locations || [];
                 
                 if (businessLocations.length > 0) {
@@ -133,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function getReviewStats() {
         try {
-            const response = await gmbClient.locations.getReviews({
+            const response = await businessProfileClient.locations.getReviews({
                 name: selectedLocation.name,
                 pageSize: 50
             });
@@ -252,7 +257,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             
             try {
-                await gmbClient.locations.reviews.createReply({
+                await businessProfileClient.locations.reviews.createReply({
                     name: review.name,
                     reviewReply: {
                         comment: replyContent
@@ -457,7 +462,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 };
             }
 
-            await gmbClient.accounts.locations.localPosts.create({
+            await businessProfileClient.locations.localPosts.create({
                 parent: selectedLocation.name,
                 resource: postData
             });
