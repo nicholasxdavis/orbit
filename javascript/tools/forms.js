@@ -38,7 +38,7 @@
 
         const redirectToDashboard = (message) => {
             alert(message);
-            window.location.href = '../../index.html';
+            window.location.href = '../../';
         };
 
         async function validateGoogleToken(accessToken) {
@@ -207,7 +207,7 @@
                 const docCount = usage.document_count || 0;
                 const MAX_FREE_DOCS = 20;
                 if (!usage.is_pro && docCount >= MAX_FREE_DOCS) {
-                     statusEl.innerHTML = `You've reached the free limit of ${MAX_FREE_DOCS} documents. <a href="../../index.html" class="text-[#50b1f7] hover:underline">Upgrade to Pro</a> for unlimited creation.`;
+                     statusEl.innerHTML = `You've reached the free limit of ${MAX_FREE_DOCS} documents. <a href="../../" class="text-[#50b1f7] hover:underline">Upgrade to Pro</a> for unlimited creation.`;
                      statusEl.style.color = '#f59e0b';
                      showLoading(false);
                      return;
