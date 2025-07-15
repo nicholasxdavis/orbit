@@ -656,19 +656,24 @@
     }
 
     async function saveGoogleToken(tokenResponse) {
-        if (!authManager.user) return;
-        const expires_at = new Date(Date.now() + tokenResponse.expires_in * 1000).toISOString();
-        const { error } = await supabase
-            .from('user_google_tokens')
-            .upsert({
-                user_id: authManager.user.id,
-                access_token: tokenResponse.access_token,
-                expires_at: expires_at,
-                updated_at: new Date().toISOString()
-            }, { onConflict: 'user_id' });
+    if (!authManager.user) return;
 
-        if (error) console.error('Error saving Google token:', error);
-    }
+    // Set expires_at to 1 year from now
+    const oneYearMs = 365 * 24 * 60 * 60 * 1000;
+    const expires_at = new Date(Date.now() + oneYearMs).toISOString();
+
+    const { error } = await supabase
+        .from('user_google_tokens')
+        .upsert({
+            user_id: authManager.user.id,
+            access_token: tokenResponse.access_token,
+            expires_at: expires_at,
+            updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id' });
+
+    if (error) console.error('Error saving Google token:', error);
+}
+
 
     async function loadGoogleToken() {
         if (!authManager.user) {
