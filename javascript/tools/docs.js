@@ -1,4 +1,4 @@
- // --- KEY DEOBFUSCATION ---
+// --- KEY DEOBFUSCATION ---
     const deobfuscate = (key) => key.replace(/\*/g, '');
 
     // --- CONFIGURATION ---
@@ -24,7 +24,8 @@
     // Global variable to hold user data
     let currentUser = null;
 
-    document.addEventListener('DOMContentLoaded', async () => {
+    // This function is now the entry point, called by the Google API script.
+    function startApp() {
         const appContent = document.getElementById('app-content');
         const loadingSkeleton = document.getElementById('loading-skeleton');
         const statusEl = document.getElementById('generator-status');
@@ -265,12 +266,11 @@
             }
         }
 
+        // Initialize the app and set up event listeners
+        initializeApp();
+        generateDocBtn.addEventListener('click', generateDocument);
+        aiEnhanceBtn.addEventListener('click', enhanceWithAI);
         reconnectGoogleBtn?.addEventListener('click', () => {
             window.location.href = '../../';
         });
-
-        initializeApp();
-
-        generateDocBtn.addEventListener('click', generateDocument);
-        aiEnhanceBtn.addEventListener('click', enhanceWithAI);
-    });
+    }
