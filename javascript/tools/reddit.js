@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('https://www.reddit.com/api/v1/access_token', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A')}`),
+                    'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A')}`)}`,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: `grant_type=refresh_token&refresh_token=${refreshToken}`
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     borderWidth: 2
                 }]
             },
-            options: { responsive: true, plugins: { legend: { position: 'right', labels: { color: '#fcfcfc' } } } }
+            options: { responsive: true, plugins: { legend: { position: 'right', labels: { color: '#fcfcfc' } } }
         });
     }
 
@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('https://www.reddit.com/api/v1/access_token', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A')}`),
+                    'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A')}`)}`,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: `grant_type=authorization_code&code=${code}&redirect_uri=${REDDIT_REDIRECT_URI}`
