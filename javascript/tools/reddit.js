@@ -46,78 +46,75 @@ document.addEventListener('DOMContentLoaded', async () => {
         loadingSkeleton.classList.toggle('hidden', !show);
     };
 
-    async function getRedditToken(userId) {
-        try {
-            const { data, error } = await supabase
-                .from('user_reddit_tokens')
-                .select('access_token, refresh_token, expires_at')
+   async function getRedditToken(userId) {
+    try {
+        const { data, error } = await supabase
+            .from('user_social_tokens')
+            .select('access_token, refresh_token, expires_at')
+            .eq('user_id', userId)
+            .eq('service', 'reddit')
+            .single();
+
+        if (error) throw error;
+        if (!data) return null;
+        
+        const now = new Date();
+        const expiresAt = new Date(data.expires_at);
+        if (expiresAt <= now) {
+            // Token is expired, try to refresh
+            const refreshed = await refreshRedditToken(data.refresh_token, userId);
+            if (refreshed) return refreshed.access_token;
+            
+            await supabase
+                .from('user_social_tokens')
+                .delete()
                 .eq('user_id', userId)
-                .single();
-
-            if (error) throw error;
-            if (!data) return null;
-
-            // <-- FIX: Store refresh token globally
-            if (data.refresh_token) {
-                redditRefreshToken = data.refresh_token;
-            }
-
-            const now = new Date();
-            const expiresAt = new Date(data.expires_at);
-            if (expiresAt <= now) {
-                // Token is expired, try to refresh
-                const refreshed = await refreshRedditToken(data.refresh_token, userId);
-                if (refreshed) return refreshed;
-
-                await supabase
-                    .from('user_reddit_tokens')
-                    .delete()
-                    .eq('user_id', userId);
-                return null;
-            }
-
-            return data.access_token;
-        } catch (error) {
-            console.error('Supabase query error:', error);
+                .eq('service', 'reddit');
             return null;
         }
+        
+        return data.access_token;
+    } catch (error) {
+        console.error('Supabase query error:', error);
+        return null;
     }
+}
 
-    async function refreshRedditToken(refreshToken, userId) {
-        try {
-            const credentials = `${REDDIT_CLIENT_ID}:${REDDIT_CLIENT_SECRET}`;
-            const response = await fetch('https://www.reddit.com/api/v1/access_token', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Basic ${btoa(credentials)}`,
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                // <-- SYNTAX FIX: Rewrote this line to ensure no hidden characters
-                body: `grant_type=refresh_token&refresh_token=${refreshToken}`
-            });
-
-            if (!response.ok) return null;
-            const data = await response.json();
-
-            const expiresAt = new Date();
-            expiresAt.setSeconds(expiresAt.getSeconds() + data.expires_in);
-
-            const { error } = await supabase
-                .from('user_reddit_tokens')
-                .upsert({
-                    user_id: userId,
-                    access_token: data.access_token,
-                    refresh_token: refreshToken, // Persist the same refresh token
-                    expires_at: expiresAt.toISOString()
-                });
-
-            if (error) throw error;
-            return data.access_token;
-        } catch (error) {
-            console.error('Token refresh error:', error);
-            return null;
-        }
+async function refreshRedditToken(refreshToken, userId) {
+    try {
+        const response = await fetch('https://www.reddit.com/api/v1/access_token', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A')}`)}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `grant_type=refresh_token&refresh_token=${refreshToken}`
+        });
+        
+        if (!response.ok) return null;
+        const tokenData = await response.json();
+        
+        const expiresAt = new Date();
+        expiresAt.setSeconds(expiresAt.getSeconds() + tokenData.expires_in);
+        
+        const { error } = await supabase
+            .from('user_social_tokens')
+            .upsert({
+                user_id: userId,
+                service: 'reddit',
+                access_token: tokenData.access_token,
+                refresh_token: refreshToken,
+                expires_at: expiresAt.toISOString()
+            }, { onConflict: 'user_id,service' });
+        
+        if (error) throw error;
+        return tokenData;
+    } catch (error) {
+        console.error('Token refresh error:', error);
+        return null;
     }
+}
+
 
     async function initializeApp() {
         showLoading(true);
