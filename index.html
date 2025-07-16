@@ -317,6 +317,10 @@
     const STRIPE_PUBLISHABLE_KEY_OBFUSCATED = 'p*k*_*t*e*s*t*_*5*1*R*8*v*i*v*G*r*s*d*J*U*1*d*j*q*O*m*J*c*5*5*2*p*6*s*q*z*K*V*m*1*Q*p*r*L*I*R*a*l*h*n*a*J*m*i*e*7*3*H*c*6*A*o*j*0*j*V*G*G*J*m*I*x*B*K*1*z*6*H*p*H*I*B*Q*Y*m*e*V*A*B*B*E*p*Q*S*8*8*0*0*w*g*y*G*p*O*4*y';
     const stripe = Stripe(deobfuscate(STRIPE_PUBLISHABLE_KEY_OBFUSCATED));
 
+    // --- REDDIT CONFIG ---
+    const REDDIT_CLIENT_ID = 'k8zVPy-VzLzKS1XOETZhug';
+    const REDDIT_CLIENT_SECRET_OBFUSCATED = 'J*q*I*-*5*k*4*M*W*7*b*K*j*Z*Y*n*P*a*i*e*w*d*P*Y*Y*O*f*j*3*A';
+
     // --- GOOGLE API CONFIG ---
     const GOOGLE_API_KEY_OBFUSCATED = 'A*I*z*a*S*y*A*U*I*v*4*H*E*M*u*f*F*0*x*5*1*e*Z*q*L*p*e*o*R*t*J*X*8*W*n*r*n*i*o';
     const GOOGLE_CLIENT_ID_OBFUSCATED = '4*6*7*1*2*2*3*4*7*1*9*5*-*5*g*g*9*e*i*8*a*h*f*l*e*0*t*t*s*e*6*j*s*l*t*2*k*k*h*i*m*l*k*k*1*.*a*p*p*s*.*g*o*o*g*l*e*u*s*e*r*c*o*n*t*e*n*t*.*c*o*m';
@@ -353,6 +357,7 @@
             this.paymentLoading = false;
             this.documentCount = 0;
             this.maxDocuments = 5;
+            this.socialTokens = [];
         }
 
         async initializeAuth() {
@@ -364,6 +369,7 @@
             
             if (this.user) {
                 await this.loadUsage();
+                await this.loadSocialTokens();
             }
             
             this.updateUI();
@@ -377,6 +383,7 @@
                 }
                 if (this.user) {
                     await this.loadUsage();
+                    await this.loadSocialTokens();
                     loadGoogleToken();
                 }
                 this.updateUI();
@@ -398,6 +405,84 @@
             document.getElementById('signUpBtn').addEventListener('click', () => this.handleSignUp());
             document.getElementById('showSignUpBtn').addEventListener('click', (e) => { e.preventDefault(); this.showSignUpForm(); });
             document.getElementById('showSignInBtn').addEventListener('click', (e) => { e.preventDefault(); this.showSignInForm(); });
+        }
+        
+        async loadSocialTokens() {
+            if (!this.user) return;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('user_social_tokens')
+                    .select('service, access_token, refresh_token, expires_at')
+                    .eq('user_id', this.user.id);
+                
+                if (error) throw error;
+                
+                this.socialTokens = data || [];
+                this.updateServiceIcons();
+            } catch (error) {
+                console.error('Error loading social tokens:', error);
+                this.socialTokens = [];
+            }
+        }
+
+        updateServiceIcons() {
+            const icons = document.querySelectorAll('.service-icon img');
+            icons.forEach(icon => {
+                const service = icon.closest('.service-icon-link').dataset.service;
+                const isAuthed = this.isServiceAuthed(service);
+                icon.classList.toggle('grayscale', !isAuthed);
+                icon.classList.toggle('opacity-70', !isAuthed);
+                icon.classList.toggle('opacity-100', isAuthed);
+                icon.classList.toggle('grayscale-0', isAuthed);
+            });
+        }
+
+        isServiceAuthed(service) {
+            if (['docs', 'sheets', 'slides', 'forms', 'email', 'mybusiness'].includes(service)) {
+                return !!gapi.client.getToken()?.access_token;
+            }
+            
+            const token = this.socialTokens.find(t => t.service === service);
+            if (!token) return false;
+            
+            return new Date(token.expires_at) > new Date();
+        }
+        
+        async saveSocialToken(service, tokenResponse) {
+            if (!this.user) return;
+            
+            const expiresAt = new Date();
+            expiresAt.setSeconds(expiresAt.getSeconds() + (tokenResponse.expires_in || 31536000)); // Default to 1 year if expires_in not provided
+            
+            const { error } = await supabase
+                .from('user_social_tokens')
+                .upsert({
+                    user_id: this.user.id,
+                    service,
+                    access_token: tokenResponse.access_token,
+                    refresh_token: tokenResponse.refresh_token,
+                    expires_at: expiresAt.toISOString()
+                }, { onConflict: 'user_id,service' });
+
+            if (error) {
+                console.error(`Error saving ${service} token:`, error);
+            } else {
+                await this.loadSocialTokens();
+            }
+        }
+
+        async handleServiceAuth(service) {
+            switch(service) {
+                case 'reddit':
+                    // Store the current path to redirect back after auth
+                    localStorage.setItem('reddit_auth_redirect', window.location.pathname);
+                    window.location.href = `https://www.reddit.com/api/v1/authorize?client_id=${REDDIT_CLIENT_ID}&response_type=code&state=orbit_reddit&redirect_uri=${window.location.origin}&duration=permanent&scope=identity,edit,flair,history,modconfig,modflair,modlog,modposts,modwiki,mysubreddits,privatemessages,read,report,save,submit,subscribe,vote,wikiedit,wikiread`;
+                    break;
+                // Add cases for other services later
+                default:
+                    console.warn('Service auth not implemented:', service);
+            }
         }
         
         async handleSignIn() {
@@ -455,10 +540,10 @@
             if (token !== null) {
                 google.accounts.oauth2.revoke(token.access_token, () => {
                     gapi.client.setToken(null);
-                    updateGoogleAuthUI(false);
+                    this.updateServiceIcons();
                 });
             } else {
-                 updateGoogleAuthUI(false);
+                this.updateServiceIcons();
             }
             if(showLoader) this.showLoading(false);
         }
@@ -658,64 +743,72 @@
     }
 
     // --- GLOBAL FUNCTIONS ---
-    function updateGoogleAuthUI(isAuthorized) {
-        const icons = document.querySelectorAll('.service-icon img');
-        icons.forEach(icon => {
-            icon.classList.toggle('grayscale', !isAuthorized);
-            icon.classList.toggle('opacity-70', !isAuthorized);
-            icon.classList.toggle('opacity-100', isAuthorized);
-            icon.classList.toggle('grayscale-0', isAuthorized);
-        });
-    }
-
     function handleServiceClick(service) {
         if (!authManager.user) {
             authManager.toggleAccountPopup(true);
             return;
         }
 
-        const isGoogleAuthed = !!gapi.client.getToken()?.access_token;
-        if (!isGoogleAuthed) {
-            pendingService = service;
-            tokenClient.requestAccessToken({ prompt: 'consent' });
+        // Handle Google services
+        if (['docs', 'sheets', 'slides', 'forms', 'email', 'mybusiness'].includes(service)) {
+            const isGoogleAuthed = !!gapi.client.getToken()?.access_token;
+            if (!isGoogleAuthed) {
+                pendingService = service;
+                tokenClient.requestAccessToken({ prompt: 'consent' });
+                return;
+            }
+            window.location.href = `./dashboard/${service}/`;
             return;
         }
-        
-        authManager.showLoading(true);
-        window.location.href = `./dashboard/${service}/`;
+
+        // Handle social services
+        switch(service) {
+            case 'reddit':
+                const redditToken = authManager.socialTokens.find(t => t.service === 'reddit');
+                if (!redditToken || new Date(redditToken.expires_at) <= new Date()) {
+                    authManager.handleServiceAuth('reddit');
+                } else {
+                    window.location.href = './dashboard/reddit/';
+                }
+                break;
+            // Add cases for other services
+            default:
+                console.warn('Service not implemented:', service);
+        }
     }
 
     async function saveGoogleToken(tokenResponse) {
-    if (!authManager.user) return;
+        if (!authManager.user) return;
 
-    // Set expires_at to 1 year from now
-    const oneYearMs = 365 * 24 * 60 * 60 * 1000;
-    const expires_at = new Date(Date.now() + oneYearMs).toISOString();
+        // Set expires_at to 1 year from now
+        const oneYearMs = 365 * 24 * 60 * 60 * 1000;
+        const expires_at = new Date(Date.now() + oneYearMs).toISOString();
 
-    const { error } = await supabase
-        .from('user_google_tokens')
-        .upsert({
-            user_id: authManager.user.id,
-            access_token: tokenResponse.access_token,
-            expires_at: expires_at,
-            updated_at: new Date().toISOString()
-        }, { onConflict: 'user_id' });
+        const { error } = await supabase
+            .from('user_social_tokens')
+            .upsert({
+                user_id: authManager.user.id,
+                service: 'google',
+                access_token: tokenResponse.access_token,
+                expires_at: expires_at,
+                updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id,service' });
 
-    if (error) console.error('Error saving Google token:', error);
-}
-
+        if (error) console.error('Error saving Google token:', error);
+    }
 
     async function loadGoogleToken() {
         if (!authManager.user) {
-            updateGoogleAuthUI(false);
+            authManager.updateServiceIcons();
             return;
         }
 
         try {
             const { data, error } = await supabase
-                .from('user_google_tokens')
+                .from('user_social_tokens')
                 .select('access_token, expires_at')
-                .eq('user_id', authManager.user.id);
+                .eq('user_id', authManager.user.id)
+                .eq('service', 'google');
 
             if (error) {
                 console.error('Supabase error:', error);
@@ -724,17 +817,54 @@
 
             if (data && data.length > 0 && new Date(data[0].expires_at) > new Date()) {
                 gapi.client.setToken({ access_token: data[0].access_token });
-                updateGoogleAuthUI(true);
+                authManager.updateServiceIcons();
             } else {
-                updateGoogleAuthUI(false);
+                authManager.updateServiceIcons();
                 if (data && data.length > 0) {
-                    await supabase.from('user_google_tokens')
+                    await supabase.from('user_social_tokens')
                         .delete()
-                        .eq('user_id', authManager.user.id);
+                        .eq('user_id', authManager.user.id)
+                        .eq('service', 'google');
                 }
             }
         } catch (err) {
             console.error('Failed to load Google token:', err);
+        }
+    }
+
+    async function completeRedditAuth(code) {
+        authManager.showLoading(true);
+        try {
+            // First get the session to ensure we're logged in
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            if (sessionError || !session) throw new Error('No active session');
+            
+            // Exchange the code for tokens
+            const response = await fetch('https://www.reddit.com/api/v1/access_token', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate(REDDIT_CLIENT_SECRET_OBFUSCATED)})}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `grant_type=authorization_code&code=${code}&redirect_uri=${window.location.origin}`
+            });
+            
+            if (!response.ok) throw new Error('Failed to get access token');
+            const tokenData = await response.json();
+            
+            // Save the token
+            await authManager.saveSocialToken('reddit', tokenData);
+            
+            // Redirect back to the original path
+            const redirectPath = localStorage.getItem('reddit_auth_redirect') || './';
+            localStorage.removeItem('reddit_auth_redirect');
+            window.location.href = redirectPath;
+            
+        } catch (error) {
+            console.error('Reddit auth error:', error);
+            alert('Failed to connect Reddit account. Please try again.');
+        } finally {
+            authManager.showLoading(false);
         }
     }
 
@@ -771,7 +901,7 @@
                     if (tokenResponse && tokenResponse.access_token) {
                         await saveGoogleToken(tokenResponse);
                         gapi.client.setToken(tokenResponse);
-                        updateGoogleAuthUI(true);
+                        authManager.updateServiceIcons();
 
                         if (pendingService) {
                             handleServiceClick(pendingService);
@@ -782,11 +912,21 @@
                     }
                 },
             });
-            authManager.initializeAuth().then(() => {
-                if (authManager.user) {
-                    loadGoogleToken();
-                }
-            });
+            
+            // Check if we're returning from Reddit auth
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+
+            if (code && state === 'orbit_reddit') {
+                completeRedditAuth(code);
+            } else {
+                authManager.initializeAuth().then(() => {
+                    if (authManager.user) {
+                        loadGoogleToken();
+                    }
+                });
+            }
         }
 
         window.onload = gapiLoaded;
