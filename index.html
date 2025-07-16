@@ -309,6 +309,9 @@
     // --- KEY DEOBFUSCATION ---
     const deobfuscate = (key) => key.replace(/\*/g, '');
 
+    // --- NON-GOOGLE-AUTH ---
+    const EDGE_FUNCTION_URL = 'https://genodqiyehczgiqgxekv.supabase.co/functions/v1/ORBIT-DONT-DELETE';
+
     // --- CONFIGURATION ---
     const SUPABASE_URL = 'https://zxeikhguvghtsqouyuyz.supabase.co';
     const SUPABASE_ANON_KEY_OBFUSCATED = 'e*y*J*h*b*G*c*i*O*i*J*I*U*z*I*1*N*i*I*s*I*n*R*5*c*C*I*6*I*k*p*X*V*C*J*9*.*e*y*J*p*c*3*M*i*O*i*J*z*d*X*B*h*Y*m*F*z*Z*S*I*s*I*n*J*l*Z*i*I*6*I*n*p*4*Z*W*l*r*a*G*d*1*d*m*d*o*d*H*N*x*b*3*V*5*d*X*l*6*I*i*w*i*c*m*9*s*Z*S*I*6*I*m*F*u*b*2*4*i*L*C*J*p*Y*X*Q*i*O*j*E*3*N*T*E*1*O*D*Y*y*M*z*A*s*I*m*V*4*c*C*I*6*M*j*A*2*N*z*E*2*M*j*I*z*M*H*0*.*a*9*j*W*r*_*h*1*d*g*y*i*_*S*T*7*s*g*K*D*A*S*D*H*i*7*h*k*M*j*S*W*O*R*7*8*V*q*2*f*M*N*0';
@@ -833,39 +836,46 @@
     }
 
     async function completeRedditAuth(code) {
-    authManager.showLoading(true);
-    try {
-        // First get the session to ensure we're logged in
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError || !session) throw new Error('No active session');
-        
-        // Exchange the code for tokens
-        const response = await fetch('https://www.reddit.com/api/v1/access_token', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate(REDDIT_CLIENT_SECRET_OBFUSCATED)}`)}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `grant_type=authorization_code&code=${code}&redirect_uri=${window.location.origin}`
-        });
-        
-        if (!response.ok) throw new Error('Failed to get access token');
-        const tokenData = await response.json();
-        
-        // Save the token
-        await authManager.saveSocialToken('reddit', tokenData);
-        
-        // Redirect back to the original path
-        const redirectPath = localStorage.getItem('reddit_auth_redirect') || './';
-        localStorage.removeItem('reddit_auth_redirect');
-        window.location.href = redirectPath;
-        
-    } catch (error) {
-        console.error('Reddit auth error:', error);
-        alert('Failed to connect Reddit account. Please try again.');
-    } finally {
-        authManager.showLoading(false);
+  showLoading(true);
+  try {
+    // Call your edge function
+    const response = await fetch(`${EDGE_FUNCTION_URL}/reddit-auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify({ code })
+    });
+
+    if (!response.ok) {
+      throw new Error(await response.text());
     }
+
+    const tokenData = await response.json();
+    
+    // Store tokens in your main Supabase instance
+    const { error } = await supabase
+      .from('user_social_tokens')
+      .upsert({
+        user_id: currentUser.id,
+        service: 'reddit',
+        access_token: tokenData.access_token,
+        refresh_token: tokenData.refresh_token,
+        expires_at: new Date(Date.now() + tokenData.expires_in * 1000).toISOString()
+      });
+
+    if (error) throw error;
+
+    // Redirect back to dashboard
+    window.location.href = '/dashboard/reddit';
+
+  } catch (error) {
+    console.error('Reddit auth error:', error);
+    alert('Authentication failed. Please try again.');
+  } finally {
+    showLoading(false);
+  }
 }
 
     // --- MAIN APP LOGIC ---
