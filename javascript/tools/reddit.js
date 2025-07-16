@@ -78,10 +78,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     async function refreshRedditToken(refreshToken, userId) {
         try {
+            // Correctly build the credentials string first for clarity and to fix bugs
+            const clientSecret = deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A');
+            const credentials = `${REDDIT_CLIENT_ID}:${clientSecret}`;
+
             const response = await fetch('https://www.reddit.com/api/v1/access_token', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A')}`),
+                    // Use the simplified, encoded credentials
+                    'Authorization': `Basic ${btoa(credentials)}`,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: `grant_type=refresh_token&refresh_token=${refreshToken}`
@@ -688,11 +693,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             const { data: { session }, error: sessionError } = await supabase.auth.getSession();
             if (sessionError || !session) throw new Error('No active session');
             
+            // Correctly build the credentials string first for clarity and to fix bugs
+            const clientSecret = deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A');
+            const credentials = `${REDDIT_CLIENT_ID}:${clientSecret}`;
+
             // Exchange the code for tokens
             const response = await fetch('https://www.reddit.com/api/v1/access_token', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Basic ${btoa(`${REDDIT_CLIENT_ID}:${deobfuscate('JqI-5k4MW7bKjZYnPaiewdPYYOfj3A')}`),
+                    // Use the simplified, encoded credentials
+                    'Authorization': `Basic ${btoa(credentials)}`,
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: `grant_type=authorization_code&code=${code}&redirect_uri=${REDDIT_REDIRECT_URI}`
