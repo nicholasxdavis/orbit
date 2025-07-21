@@ -123,39 +123,57 @@
             <h2 class="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Your Workspace</h2>
             <p class="mb-8 text-dark-tertiary">Link your accounts to enable the AI-powered tools.</p>
             <div id="google-services-icons" class="grid grid-cols-5 justify-items-center gap-y-6 gap-x-4">
-                <a href="#" class="service-icon-link text-center no-underline" data-service="docs">
-                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                <a href="#" class="service-icon-link text-center no-underline" data-service="docs" data-is-google-service="true">
+                    <div class="service-icon transition-all duration-300 cursor-pointer relative">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/47px-Google_Docs_logo_%282014-2020%29.svg.png?20220322143607" alt="Google Docs" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Docs';">
+                        <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white hidden status-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                        </div>
                     </div>
                     <p class="mt-2 text-sm text-dark-tertiary">Docs</p>
                 </a>
-                <a href="#" class="service-icon-link text-center no-underline" data-service="sheets">
-                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                <a href="#" class="service-icon-link text-center no-underline" data-service="sheets" data-is-google-service="true">
+                    <div class="service-icon transition-all duration-300 cursor-pointer relative">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Google_Sheets_logo_%282014-2020%29.svg/49px-Google_Sheets_logo_%282014-2020%29.svg.png?20201024100414" alt="Google Sheets" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Sheets';">
+                        <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white hidden status-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                        </div>
                     </div>
                     <p class="mt-2 text-sm text-dark-tertiary">Sheets</p>
                 </a>
-                <a href="#" class="service-icon-link text-center no-underline" data-service="slides">
-                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                <a href="#" class="service-icon-link text-center no-underline" data-service="slides" data-is-google-service="true">
+                    <div class="service-icon transition-all duration-300 cursor-pointer relative">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Google_Slides_logo_%282014-2020%29.svg/48px-Google_Slides_logo_%282014-2020%29.svg.png?20201024100433" alt="Google Slides" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Slides';">
+                        <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white hidden status-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                        </div>
                     </div>
                     <p class="mt-2 text-sm text-dark-tertiary">Slides</p>
                 </a>
-                <a href="#" class="service-icon-link text-center no-underline" data-service="forms">
-                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                <a href="#" class="service-icon-link text-center no-underline" data-service="forms" data-is-google-service="true">
+                    <div class="service-icon transition-all duration-300 cursor-pointer relative">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Google_Forms_logo_%282014-2020%29.svg/48px-Google_Forms_logo_%282014-2020%29.svg.png?20201024102621" alt="Google Forms" class="h-12 w-10 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Forms';">
+                        <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white hidden status-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                        </div>
                     </div>
                     <p class="mt-2 text-sm text-dark-tertiary">Forms</p>
                 </a>
-                <a href="#" class="service-icon-link text-center no-underline" data-service="email">
-                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                <a href="#" class="service-icon-link text-center no-underline" data-service="email" data-is-google-service="true">
+                    <div class="service-icon transition-all duration-300 cursor-pointer relative">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/64px-Gmail_icon_%282020%29.svg.png" alt="Gmail" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Gmail';">
+                        <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white hidden status-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                        </div>
                     </div>
                     <p class="mt-2 text-sm text-dark-tertiary">Email</p>
                 </a>
-                <a href="#" class="service-icon-link text-center no-underline" data-service="mybusiness">
-                    <div class="service-icon transition-all duration-300 cursor-pointer">
+                <a href="#" class="service-icon-link text-center no-underline" data-service="mybusiness" data-is-google-service="true">
+                    <div class="service-icon transition-all duration-300 cursor-pointer relative">
                         <img src="https://nicholasxdavis.github.io/docs/img/business.png" alt="Google My Business" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=GMB';">
+                        <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white hidden status-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                        </div>
                     </div>
                     <p class="mt-2 text-sm text-dark-tertiary">GMB</p>
                 </a>
@@ -167,7 +185,7 @@
                 </a>
                 <a href="#" class="service-icon-link text-center no-underline" data-service="discord">
                     <div class="service-icon transition-all duration-300 cursor-pointer">
-                        <img src="https://nicholasxdavis.github.io/docs/img/discord.svg" alt="Discord" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https.placehold.co/48x48/242628/fcfcfc?text=Discord';">
+                        <img src="https://nicholasxdavis.github.io/docs/img/discord.svg" alt="Discord" class="h-12 w-12 grayscale opacity-70 hover:opacity-100 hover:grayscale-0" onerror="this.onerror=null; this.src='https://placehold.co/48x48/242628/fcfcfc?text=Discord';">
                     </div>
                     <p class="mt-2 text-sm text-dark-tertiary">Discord</p>
                 </a>
@@ -186,57 +204,121 @@
             </div>
         </div>
     </div>
-
-    <div class="bg-dark-secondary/60 mt-16 glassmorphism p-8 rounded-3xl shadow-xl z-[10] border-2 border-[#fcfcfc]/40">
-        <div id="wc" class="mb-12">
-            <h2 class="text-3xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Powerful Features</h2>
-            <p class="mb-8 text-dark-tertiary text-center">Link your accounts to enable the AI-powered tools.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
-                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+  <div class="mt-16 bg-dark-secondary/60 glassmorphism p-8 rounded-3xl shadow-xl z-[10] border-2 border-[#fcfcfc]/40">
+    <div id="workspace-connector" class="mb-12 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Our Tools</h2>
+        <p class="mb-8 text-dark-tertiary">Explore AI-powered tools to simplify and enhance your tasks.</p>
+        <div id="tools-icons" class="grid grid-cols-5 justify-items-center gap-y-6 gap-x-4">
+            <a href="tools/image-generation/" class="service-icon-link text-center no-underline flex flex-col items-center" data-service="image-generation">
+                <div class="service-icon transition-all duration-300 cursor-pointer relative">
+                    <svg class="h-12 w-12 text-gray-400 transition-colors duration-300 hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full py-0.5 px-1.5 text-white text-[10px] font-bold pro-badge">
+                        PRO
                     </div>
-                    <h3 class="text-lg font-semibold">Cross-Platform Generation</h3>
-                    <p class="text-dark-tertiary text-sm">Create documents, spreadsheets, presentations, and forms instantly with AI assistance across all Google Workspace tools.</p>
                 </div>
-                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
-                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                <p class="mt-2 text-sm text-dark-tertiary">Image Generation</p>
+            </a>
+            <a href="tools/speech-generation/" class="service-icon-link text-center no-underline flex flex-col items-center" data-service="speech-generation">
+                <div class="service-icon transition-all duration-300 cursor-pointer relative">
+                    <svg class="h-12 w-12 text-gray-400 transition-colors duration-300 hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                    <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full py-0.5 px-1.5 text-white text-[10px] font-bold pro-badge">
+                        PRO
                     </div>
-                    <h3 class="text-lg font-semibold">Smart Formatting</h3>
-                    <p class="text-dark-tertiary text-sm">Automatically structure and format your content with AI-powered templates for each platform.</p>
                 </div>
-                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
-                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"></path></svg>
+                <p class="mt-2 text-sm text-dark-tertiary">Speech Generation</p>
+            </a>
+            <a href="tools/invoice-generation/" class="service-icon-link text-center no-underline flex flex-col items-center" data-service="invoice-generation">
+                <div class="service-icon transition-all duration-300 cursor-pointer relative">
+                    <svg class="h-12 w-12 text-gray-400 transition-colors duration-300 hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Data Analysis</h3>
-                    <p class="text-dark-tertiary text-sm">Transform raw data into insights with AI-powered spreadsheet formulas and visualization tools.</p>
                 </div>
-                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
-                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                <p class="mt-2 text-sm text-dark-tertiary">Invoice Generation</p>
+            </a>
+            <a href="tools/whats-trending/" class="service-icon-link text-center no-underline flex flex-col items-center" data-service="whats-trending">
+                <div class="service-icon transition-all duration-300 cursor-pointer relative">
+                    <svg class="h-12 w-12 text-gray-400 transition-colors duration-300 hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Presentation Design</h3>
-                    <p class="text-dark-tertiary text-sm">Create stunning slides with automatic layout suggestions and design recommendations.</p>
                 </div>
-                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
-                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <p class="mt-2 text-sm text-dark-tertiary">Whats Trending</p>
+            </a>
+            <a href="tools/analytics-overview/" class="service-icon-link text-center no-underline flex flex-col items-center" data-service="analytics-overview">
+                <div class="service-icon transition-all duration-300 cursor-pointer relative">
+                    <svg class="h-12 w-12 text-gray-400 transition-colors duration-300 hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                    </svg>
+                    <div class="absolute bottom-0 -right-1 bg-[#5babe2] rounded-full h-5 w-5 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Secure Cloud Sync</h3>
-                    <p class="text-dark-tertiary text-sm">All your work is automatically saved and synced across Google Workspace platforms.</p>
                 </div>
-                <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
-                    <div class="w-12 h-12 rounded-lg flex items-center justify-center">
-                        <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h3 class="text-lg font-semibold">Email Automation</h3>
-                    <p class="text-dark-tertiary text-sm">Generate professional emails and responses with AI, directly from your Gmail.</p>
+                <p class="mt-2 text-sm text-dark-tertiary">Analytics Overview</p>
+            </a>
+        </div>
+    </div>
+</div>
+   <div class="bg-dark-secondary/60 mt-16 glassmorphism p-8 rounded-3xl shadow-xl z-[10] border-2 border-[#fcfcfc]/40">
+    <div id="workspace-connector" class="mb-12 text-center">
+        <h2 class="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300/75">Powerful Features</h2>
+        <p class="mb-8 text-dark-tertiary">Link your accounts to enable the AI-powered tools.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr">
+            <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                    <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                 </div>
+                <h3 class="text-lg font-semibold">Cross-Platform Generation</h3>
+                <p class="text-dark-tertiary text-sm">Create documents, spreadsheets, presentations, and forms instantly with AI assistance across all Google Workspace tools.</p>
+            </div>
+            <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                    <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                </div>
+                <h3 class="text-lg font-semibold">Smart Formatting</h3>
+                <p class="text-dark-tertiary text-sm">Automatically structure and format your content with AI-powered templates for each platform.</p>
+            </div>
+            <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                    <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z"></path></svg>
+                </div>
+                <h3 class="text-lg font-semibold">Data Analysis</h3>
+                <p class="text-dark-tertiary text-sm">Transform raw data into insights with AI-powered spreadsheet formulas and visualization tools.</p>
+            </div>
+            <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                    <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                </div>
+                <h3 class="text-lg font-semibold">Presentation Design</h3>
+                <p class="text-dark-tertiary text-sm">Create stunning slides with automatic layout suggestions and design recommendations.</p>
+            </div>
+            <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                    <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h3 class="text-lg font-semibold">Secure Cloud Sync</h3>
+                <p class="text-dark-tertiary text-sm">All your work is automatically saved and synced across Google Workspace platforms.</p>
+            </div>
+            <div class="h-full p-6 rounded-3xl bg-dark-primary flex flex-col gap-6 shadow-sm z-[10] border-2 border-[#fcfcfc]/20">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+                    <svg class="w-10 h-10 text-[#57add6]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3 class="text-lg font-semibold">Email Automation</h3>
+                <p class="text-dark-tertiary text-sm">Generate professional emails and responses with AI, directly from your Gmail.</p>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div id="auth-prompt" class="text-center p-10  backdrop-blur-lg rounded-3xl  max-w-md mx-auto animate-fade-up ">
     <div class="w-24 h-24 mx-auto mb-6 rounded-[2rem] bg-gradient-to-br from-cyan-400 to-blue-400/50 flex items-center justify-center shadow-lg">
@@ -307,388 +389,434 @@
     
 <script>
     // --- KEY DEOBFUSCATION ---
-    const deobfuscate = (key) => key.replace(/\*/g, '');
+const deobfuscate = (key) => key.replace(/\*/g, '');
 
-    // --- CONFIGURATION ---
-    const SUPABASE_URL = 'https://zxeikhguvghtsqouyuyz.supabase.co';
-    const SUPABASE_ANON_KEY_OBFUSCATED = 'e*y*J*h*b*G*c*i*O*i*J*I*U*z*I*1*N*i*I*s*I*n*R*5*c*C*I*6*I*k*p*X*V*C*J*9*.*e*y*J*p*c*3*M*i*O*i*J*z*d*X*B*h*Y*m*F*z*Z*S*I*s*I*n*J*l*Z*i*I*6*I*n*p*4*Z*W*l*r*a*G*d*1*d*m*d*o*d*H*N*x*b*3*V*5*d*X*l*6*I*i*w*i*c*m*9*s*Z*S*I*6*I*m*F*u*b*2*4*i*L*C*J*p*Y*X*Q*i*O*j*E*3*N*T*E*1*O*D*Y*y*M*z*A*s*I*m*V*4*c*C*I*6*M*j*A*2*N*z*E*2*M*j*I*z*M*H*0*.*a*9*j*W*r*_*h*1*d*g*y*i*_*S*T*7*s*g*K*D*A*S*D*H*i*7*h*k*M*j*S*W*O*R*7*8*V*q*2*f*M*N*0';
-    const supabase = window.supabase.createClient(SUPABASE_URL, deobfuscate(SUPABASE_ANON_KEY_OBFUSCATED));
-    
-    const STRIPE_PUBLISHABLE_KEY_OBFUSCATED = 'p*k*_*t*e*s*t*_*5*1*R*8*v*i*v*G*r*s*d*J*U*1*d*j*q*O*m*J*c*5*5*2*p*6*s*q*z*K*V*m*1*Q*p*r*L*I*R*a*l*h*n*a*J*m*i*e*7*3*H*c*6*A*o*j*0*j*V*G*G*J*m*I*x*B*K*1*z*6*H*p*H*I*B*Q*Y*m*e*V*A*B*B*E*p*Q*S*8*8*0*0*w*g*y*G*p*O*4*y';
-    const stripe = Stripe(deobfuscate(STRIPE_PUBLISHABLE_KEY_OBFUSCATED));
+// --- CONFIGURATION ---
+const SUPABASE_URL = 'https://zxeikhguvghtsqouyuyz.supabase.co';
+const SUPABASE_ANON_KEY_OBFUSCATED = 'e*y*J*h*b*G*c*i*O*i*J*I*U*z*I*1*N*i*I*s*I*n*R*5*c*C*I*6*I*k*p*X*V*C*J*9*.*e*y*J*p*c*3*M*i*O*i*J*z*d*X*B*h*Y*m*F*z*Z*S*I*s*I*n*J*l*Z*i*I*6*I*n*p*4*Z*W*l*r*a*G*d*1*d*m*d*o*d*H*N*x*b3*V*5*d*X*l*6*I*i*w*i*c*m*9*s*Z*S*I*6*I*m*F*u*b*2*4*i*L*C*J*p*Y*X*Q*i*O*j*E*3*N*T*E*1*O*D*Y*y*M*z*A*s*I*m*V*4*c*C*I*6*M*j*A*2*N*z*E*2*M*j*I*z*M*H*0*.*a*9*j*W*r*_*h*1*d*g*y*i*_*S*T*7*s*g*K*D*A*S*D*H*i*7*h*k*M*j*S*W*O*R*7*8*V*q*2*f*M*N*0';
+const supabase = window.supabase.createClient(SUPABASE_URL, deobfuscate(SUPABASE_ANON_KEY_OBFUSCATED));
 
-    // --- GOOGLE API CONFIG ---
-    const GOOGLE_API_KEY_OBFUSCATED = 'A*I*z*a*S*y*A*U*I*v*4*H*E*M*u*f*F*0*x*5*1*e*Z*q*L*p*e*o*R*t*J*X*8*W*n*r*n*i*o';
-    const GOOGLE_CLIENT_ID_OBFUSCATED = '4*6*7*1*2*2*3*4*7*1*9*5*-*5*g*g*9*e*i*8*a*h*f*l*e*0*t*t*s*e*6*j*s*l*t*2*k*k*h*i*m*l*k*k*1*.*a*p*p*s*.*g*o*o*g*l*e*u*s*e*r*c*o*n*t*e*n*t*.*c*o*m';
-    const DISCOVERY_DOCS = [
-        'https://docs.googleapis.com/$discovery/rest?version=v1',
-        'https://sheets.googleapis.com/$discovery/rest?version=v4',
-        'https://slides.googleapis.com/$discovery/rest?version=v1',
-        'https://forms.googleapis.com/$discovery/rest?version=v1',
-        'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'
-    ];
-    const SCOPES = [
-        'https://www.googleapis.com/auth/documents', 
-        'https://www.googleapis.com/auth/drive.file',
-        'https://www.googleapis.com/auth/spreadsheets',
-        'https://www.googleapis.com/auth/presentations',
-        'https://www.googleapis.com/auth/forms.body',
-        'https://www.googleapis.com/auth/gmail.send',
-        'https://www.googleapis.com/auth/gmail.readonly'
-    ].join(' ');
+const STRIPE_PUBLISHABLE_KEY_OBFUSCATED = 'p*k*_*t*e*s*t*_*5*1*R*8*v*i*v*G*r*s*d*J*U*1*d*j*q*O*m*J*c*5*5*2*p*6*s*q*z*K*V*m*1*Q*p*r*L*I*R*a*l*h*n*a*J*m*i*e*7*3*H*c*6*A*o*j*0*j*V*G*G*J*m*I*x*B*K*1*z*6*H*p*H*I*B*Q*Y*m*e*V*A*B*B*E*p*Q*S*8*8*0*0*w*g*y*G*p*O*4*y';
+const stripe = Stripe(deobfuscate(STRIPE_PUBLISHABLE_KEY_OBFUSCATED));
 
-    // --- GLOBAL VARIABLES ---
-    let tokenClient;
-    let threeJSInitialized = false;
-    let pendingService = null; 
-    let authManager; 
+// --- GOOGLE API CONFIG ---
+const GOOGLE_API_KEY_OBFUSCATED = 'A*I*z*a*S*y*A*U*I*v*4*H*E*M*u*f*F*0*x*5*1*e*Z*q*L*p*e*o*R*t*J*X*8*W*n*r*n*i*o';
+const GOOGLE_CLIENT_ID_OBFUSCATED = '4*6*7*1*2*2*3*4*7*1*9*5*-*5*g*g*9*e*i*8*a*h*f*l*e*0*t*t*s*e*6*j*s*l*t*2*k*k*h*i*m*l*k*k*1*.*a*p*p*s*.*g*o*o*g*l*e*u*s*e*r*c*o*n*t*e*n*t*.*c*o*m';
+const DISCOVERY_DOCS = [
+    'https://docs.googleapis.com/$discovery/rest?version=v1',
+    'https://sheets.googleapis.com/$discovery/rest?version=v4',
+    'https://slides.googleapis.com/$discovery/rest?version=v1',
+    'https://forms.googleapis.com/$discovery/rest?version=v1',
+    'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'
+];
+const SCOPES = [
+    'https://www.googleapis.com/auth/documents', 
+    'https://www.googleapis.com/auth/drive.file',
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/presentations',
+    'https://www.googleapis.com/auth/forms.body',
+    'https://www.googleapis.com/auth/gmail.send',
+    'https://www.googleapis.com/auth/gmail.readonly'
+].join(' ');
 
-    // --- AUTH MANAGER CLASS ---
-    class AuthManager {
-        constructor() {
-            this.user = null;
-            this.session = null;
-            this.hasActiveSubscription = false;
-            this.userPlan = 'free';
-            this.paymentLoading = false;
-            this.documentCount = 0;
-            this.maxDocuments = 5;
+// --- DISCORD CONFIG ---
+const DISCORD_CLIENT_ID = '1396661896525906001';
+const DISCORD_REDIRECT_URI = window.location.origin + '/tools/discord/auth-callback';
+const DISCORD_SCOPES = ['identify', 'guilds', 'bot', 'messages.read'];
+const DISCORD_AUTH_URL = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(DISCORD_REDIRECT_URI)}&response_type=code&scope=${DISCORD_SCOPES.join('%20')}`;
+
+// --- GLOBAL VARIABLES ---
+let tokenClient;
+let threeJSInitialized = false;
+let pendingService = null; 
+let authManager; 
+
+// --- AUTH MANAGER CLASS ---
+class AuthManager {
+    constructor() {
+        this.user = null;
+        this.session = null;
+        this.hasActiveSubscription = false;
+        this.userPlan = 'free';
+        this.paymentLoading = false;
+        this.documentCount = 0;
+        this.maxDocuments = 5;
+    }
+
+    async initializeAuth() {
+        this.setupAuthEventListeners();
+        this.showLoading(true);
+        const { data: { session } } = await supabase.auth.getSession();
+        this.session = session;
+        this.user = session?.user || null;
+        
+        if (this.user) {
+            await this.loadUsage();
         }
+        
+        this.updateUI();
+        this.showLoading(false);
 
-        async initializeAuth() {
-            this.setupAuthEventListeners();
-            this.showLoading(true);
-            const { data: { session } } = await supabase.auth.getSession();
+        supabase.auth.onAuthStateChange(async (event, session) => {
             this.session = session;
             this.user = session?.user || null;
-            
+            if (event === 'SIGNED_OUT') {
+                this.handleGoogleSignOut(false);
+            }
             if (this.user) {
                 await this.loadUsage();
+                loadGoogleToken();
             }
-            
             this.updateUI();
+        });
+    }
+
+    showLoading(show) {
+        document.getElementById('loading-skeleton').classList.toggle('hidden', !show);
+    }
+
+    setupAuthEventListeners() {
+        document.getElementById('accountBtn').addEventListener('click', () => this.toggleAccountPopup());
+        document.getElementById('masterSignInBtn').addEventListener('click', () => this.toggleAccountPopup(true));
+        document.getElementById('signOutBtn').addEventListener('click', () => this.handleSignOut());
+        document.getElementById('closeAccountPopupBtn').addEventListener('click', () => this.closeAccountPopup());
+        document.getElementById('overlay').addEventListener('click', () => this.closeAccountPopup());
+        document.getElementById('upgradeToProBtn').addEventListener('click', () => this.handleUpgrade());
+        document.getElementById('signInBtn').addEventListener('click', () => this.handleSignIn());
+        document.getElementById('signUpBtn').addEventListener('click', () => this.handleSignUp());
+        document.getElementById('showSignUpBtn').addEventListener('click', (e) => { e.preventDefault(); this.showSignUpForm(); });
+        document.getElementById('showSignInBtn').addEventListener('click', (e) => { e.preventDefault(); this.showSignInForm(); });
+    }
+    
+    async handleSignIn() {
+        const email = document.getElementById('signInEmail').value;
+        const password = document.getElementById('signInPassword').value;
+        const signInError = document.getElementById('signInError');
+        if (!email || !password) {
+            signInError.textContent = 'Please fill in all fields';
+            signInError.classList.remove('hidden');
+            return;
+        }
+        this.showLoading(true);
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+            signInError.textContent = error.message;
+            signInError.classList.remove('hidden');
             this.showLoading(false);
-
-            supabase.auth.onAuthStateChange(async (event, session) => {
-                this.session = session;
-                this.user = session?.user || null;
-                if (event === 'SIGNED_OUT') {
-                    this.handleGoogleSignOut(false);
-                }
-                if (this.user) {
-                    await this.loadUsage();
-                    loadGoogleToken();
-                }
-                this.updateUI();
-            });
-        }
-
-        showLoading(show) {
-            document.getElementById('loading-skeleton').classList.toggle('hidden', !show);
-        }
-
-        setupAuthEventListeners() {
-            document.getElementById('accountBtn').addEventListener('click', () => this.toggleAccountPopup());
-            document.getElementById('masterSignInBtn').addEventListener('click', () => this.toggleAccountPopup(true));
-            document.getElementById('signOutBtn').addEventListener('click', () => this.handleSignOut());
-            document.getElementById('closeAccountPopupBtn').addEventListener('click', () => this.closeAccountPopup());
-            document.getElementById('overlay').addEventListener('click', () => this.closeAccountPopup());
-            document.getElementById('upgradeToProBtn').addEventListener('click', () => this.handleUpgrade());
-            document.getElementById('signInBtn').addEventListener('click', () => this.handleSignIn());
-            document.getElementById('signUpBtn').addEventListener('click', () => this.handleSignUp());
-            document.getElementById('showSignUpBtn').addEventListener('click', (e) => { e.preventDefault(); this.showSignUpForm(); });
-            document.getElementById('showSignInBtn').addEventListener('click', (e) => { e.preventDefault(); this.showSignInForm(); });
-        }
-        
-        async handleSignIn() {
-            const email = document.getElementById('signInEmail').value;
-            const password = document.getElementById('signInPassword').value;
-            const signInError = document.getElementById('signInError');
-            if (!email || !password) {
-                signInError.textContent = 'Please fill in all fields';
-                signInError.classList.remove('hidden');
-                return;
-            }
-            this.showLoading(true);
-            const { error } = await supabase.auth.signInWithPassword({ email, password });
-            if (error) {
-                signInError.textContent = error.message;
-                signInError.classList.remove('hidden');
-                this.showLoading(false);
-            } else {
-                this.closeAccountPopup();
-                this.showLoading(false);
-            }
-        }
-        
-        async handleSignUp() {
-            const email = document.getElementById('signUpEmail').value;
-            const password = document.getElementById('signUpPassword').value;
-            const signUpError = document.getElementById('signUpError');
-            if (!email || password.length < 6) {
-                signUpError.textContent = 'Password must be at least 6 characters.';
-                signUpError.classList.remove('hidden');
-                return;
-            }
-            this.showLoading(true);
-            const { error } = await supabase.auth.signUp({ email, password });
-            if (error) {
-                signUpError.textContent = error.message;
-                signUpError.classList.remove('hidden');
-            } else {
-                alert('Check your email for a confirmation link!');
-                this.closeAccountPopup();
-            }
-            this.showLoading(false);
-        }
-
-        async handleSignOut() {
-            this.showLoading(true);
-            await supabase.auth.signOut();
+        } else {
             this.closeAccountPopup();
             this.showLoading(false);
         }
-
-        handleGoogleSignOut(showLoader = true) {
-            if(showLoader) this.showLoading(true);
-            const token = gapi.client.getToken();
-            if (token !== null) {
-                google.accounts.oauth2.revoke(token.access_token, () => {
-                    gapi.client.setToken(null);
-                    updateGoogleAuthUI(false);
-                });
-            } else {
-                 updateGoogleAuthUI(false);
-            }
-            if(showLoader) this.showLoading(false);
-        }
-
-        async handleUpgrade() {
-            if (this.paymentLoading) return;
-            this.paymentLoading = true;
-            
-            try {
-                const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-                    body: JSON.stringify({
-                        user_id: this.user.id,
-                        email: this.user.email
-                    })
-                });
-                
-                if (error) {
-                    console.error('Supabase function error:', error);
-                    alert('Failed to start payment process. Please try again later.');
-                    return;
-                }
-                
-                if (!data?.sessionId) {
-                    throw new Error('Invalid response from server');
-                }
-                
-                const result = await stripe.redirectToCheckout({
-                    sessionId: data.sessionId
-                });
-                
-                if (result.error) {
-                    throw result.error;
-                }
-            } catch (error) {
-                console.error('Payment error:', error);
-                alert(`Payment failed: ${error.message}`);
-            } finally {
-                this.paymentLoading = false;
-            }
-        }
-
-        async loadUsage() {
-            try {
-                const { data, error } = await supabase
-                    .from('user_usage')
-                    .select('document_count, is_pro')
-                    .eq('user_id', this.user.id)
-                    .single();
-                
-                if (error) throw error;
-                
-                this.documentCount = data?.document_count || 0;
-                this.hasActiveSubscription = data?.is_pro || false;
-                this.userPlan = this.hasActiveSubscription ? 'pro' : 'free';
-                
-                const usagePercentage = this.hasActiveSubscription ? 100 : 
-                    Math.min(100, (this.documentCount / 20) * 100);
-                document.getElementById('usageBar').style.width = `${usagePercentage}%`;
-            } catch (error) {
-                console.error('Error loading usage:', error);
-                const { error: insertError } = await supabase
-                    .from('user_usage')
-                    .insert([{ 
-                        user_id: this.user.id,
-                        document_count: 0,
-                        is_pro: false 
-                    }]);
-                
-                if (insertError) console.error('Error initializing usage:', insertError);
-                else {
-                    this.documentCount = 0;
-                    this.hasActiveSubscription = false;
-                    document.getElementById('usageBar').style.width = '0%';
-                }
-            }
-        }
-
-        updateUI() {
-            const isLoggedIn = !!this.user;
-            document.getElementById('app-content').classList.toggle('hidden', !isLoggedIn);
-            document.getElementById('auth-prompt').classList.toggle('hidden', isLoggedIn);
-            this.updateAccountPopupUI();
-            if (isLoggedIn && !threeJSInitialized) {
-                initThreeJSBackground();
-                initAnimations();
-                threeJSInitialized = true;
-            }
-        }
-
-        updateAccountPopupUI() {
-            const loggedOutView = document.getElementById('loggedOutView');
-            const accountActions = document.getElementById('accountActions');
-            const proBadge = document.getElementById('proBadge');
-
-            if (this.user) {
-                document.getElementById('accountUserEmail').textContent = this.user.email;
-                document.getElementById('accountUserPlan').textContent = this.userPlan === 'pro' ? 'Pro' : 'Free';
-                proBadge.classList.toggle('hidden', !this.hasActiveSubscription);
-                document.getElementById('upgradeToProBtn').classList.toggle('hidden', this.hasActiveSubscription);
-                document.getElementById('upgrade-prompt').classList.toggle('hidden', this.hasActiveSubscription);
-                
-                const initials = this.user.email.slice(0, 2).toUpperCase();
-                document.getElementById('accountInitials').textContent = initials;
-                
-                loggedOutView.classList.add('hidden');
-                accountActions.classList.remove('hidden');
-            } else {
-                loggedOutView.classList.remove('hidden');
-                accountActions.classList.add('hidden');
-                this.showSignInForm();
-                proBadge.classList.add('hidden');
-            }
-        }
-
-        toggleAccountPopup(forceOpen = false) {
-            const popup = document.getElementById('accountPopup');
-            const overlay = document.getElementById('overlay');
-            if (forceOpen || popup.classList.contains('hidden')) {
-                popup.classList.remove('hidden');
-                overlay.classList.remove('hidden');
-                this.updateAccountPopupUI();
-            } else {
-                this.closeAccountPopup();
-            }
-        }
-        closeAccountPopup() {
-            document.getElementById('accountPopup').classList.add('hidden');
-            document.getElementById('overlay').classList.add('hidden');
-        }
-        showSignUpForm() {
-            document.getElementById('signInForm').classList.add('hidden');
-            document.getElementById('signUpForm').classList.remove('hidden');
-            document.getElementById('signInError').classList.add('hidden');
-        }
-        showSignInForm() {
-            document.getElementById('signUpForm').classList.add('hidden');
-            document.getElementById('signInForm').classList.remove('hidden');
-            document.getElementById('signUpError').classList.add('hidden');
-        }
     }
-
-    // --- VISUALS & ANIMATIONS ---
-    function initThreeJSBackground() {
-        const container = document.getElementById('canvas-container');
-        if (!container) return;
-        const width = container.clientWidth;
-        const height = container.clientHeight;
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(width, height);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        container.appendChild(renderer.domElement);
-        
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particleCount = 100;
-        const posArray = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 10;
-        }
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.05,
-            color: 0x50b1f7,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 3;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.x += 0.0005;
-            particlesMesh.rotation.y += 0.0005;
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            const newWidth = container.clientWidth;
-            const newHeight = container.clientHeight;
-            camera.aspect = newWidth / newHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(newWidth, newHeight);
-        });
-    }
-
-    function initAnimations() {
-        gsap.utils.toArray('.animate-fade-up').forEach(el => {
-            gsap.from(el, { y: 20, opacity: 0, duration: 0.8, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 80%", toggleActions: "play none none none" } });
-        });
-        gsap.utils.toArray('.card-hover').forEach((card, i) => {
-            gsap.from(card, { x: i % 2 === 0 ? -20 : 20, opacity: 0, duration: 0.6, delay: i * 0.1, ease: "back.out(1.7)", scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none none" } });
-        });
-    }
-
-    // --- GLOBAL FUNCTIONS ---
-    function updateGoogleAuthUI(isAuthorized) {
-        const icons = document.querySelectorAll('.service-icon img');
-        icons.forEach(icon => {
-            icon.classList.toggle('grayscale', !isAuthorized);
-            icon.classList.toggle('opacity-70', !isAuthorized);
-            icon.classList.toggle('opacity-100', isAuthorized);
-            icon.classList.toggle('grayscale-0', isAuthorized);
-        });
-    }
-
-    function handleServiceClick(service) {
-        if (!authManager.user) {
-            authManager.toggleAccountPopup(true);
+    
+    async handleSignUp() {
+        const email = document.getElementById('signUpEmail').value;
+        const password = document.getElementById('signUpPassword').value;
+        const signUpError = document.getElementById('signUpError');
+        if (!email || password.length < 6) {
+            signUpError.textContent = 'Password must be at least 6 characters.';
+            signUpError.classList.remove('hidden');
             return;
         }
+        this.showLoading(true);
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) {
+            signUpError.textContent = error.message;
+            signUpError.classList.remove('hidden');
+        } else {
+            alert('Check your email for a confirmation link!');
+            this.closeAccountPopup();
+        }
+        this.showLoading(false);
+    }
 
+    async handleSignOut() {
+        this.showLoading(true);
+        await supabase.auth.signOut();
+        this.closeAccountPopup();
+        this.showLoading(false);
+    }
+
+    handleGoogleSignOut(showLoader = true) {
+        if(showLoader) this.showLoading(true);
+        const token = gapi.client.getToken();
+        if (token !== null) {
+            google.accounts.oauth2.revoke(token.access_token, () => {
+                gapi.client.setToken(null);
+                updateGoogleAuthUI(false);
+            });
+        } else {
+             updateGoogleAuthUI(false);
+        }
+        if(showLoader) this.showLoading(false);
+    }
+
+    async handleUpgrade() {
+        if (this.paymentLoading) return;
+        this.paymentLoading = true;
+        
+        try {
+            const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+                body: JSON.stringify({
+                    user_id: this.user.id,
+                    email: this.user.email
+                })
+            });
+            
+            if (error) {
+                console.error('Supabase function error:', error);
+                alert('Failed to start payment process. Please try again later.');
+                return;
+            }
+            
+            if (!data?.sessionId) {
+                throw new Error('Invalid response from server');
+            }
+            
+            const result = await stripe.redirectToCheckout({
+                sessionId: data.sessionId
+            });
+            
+            if (result.error) {
+                throw result.error;
+            }
+        } catch (error) {
+            console.error('Payment error:', error);
+            alert(`Payment failed: ${error.message}`);
+        } finally {
+            this.paymentLoading = false;
+        }
+    }
+
+    async loadUsage() {
+        try {
+            const { data, error } = await supabase
+                .from('user_usage')
+                .select('document_count, is_pro')
+                .eq('user_id', this.user.id)
+                .single();
+            
+            if (error) throw error;
+            
+            this.documentCount = data?.document_count || 0;
+            this.hasActiveSubscription = data?.is_pro || false;
+            this.userPlan = this.hasActiveSubscription ? 'pro' : 'free';
+            
+            const usagePercentage = this.hasActiveSubscription ? 100 : 
+                Math.min(100, (this.documentCount / 20) * 100);
+            document.getElementById('usageBar').style.width = `${usagePercentage}%`;
+        } catch (error) {
+            console.error('Error loading usage:', error);
+            const { error: insertError } = await supabase
+                .from('user_usage')
+                .insert([{ 
+                    user_id: this.user.id,
+                    document_count: 0,
+                    is_pro: false 
+                }]);
+            
+            if (insertError) console.error('Error initializing usage:', insertError);
+            else {
+                this.documentCount = 0;
+                this.hasActiveSubscription = false;
+                document.getElementById('usageBar').style.width = '0%';
+            }
+        }
+    }
+
+    updateUI() {
+        const isLoggedIn = !!this.user;
+        document.getElementById('app-content').classList.toggle('hidden', !isLoggedIn);
+        document.getElementById('auth-prompt').classList.toggle('hidden', isLoggedIn);
+        this.updateAccountPopupUI();
+        if (isLoggedIn && !threeJSInitialized) {
+            initThreeJSBackground();
+            initAnimations();
+            threeJSInitialized = true;
+        }
+    }
+
+    updateAccountPopupUI() {
+        const loggedOutView = document.getElementById('loggedOutView');
+        const accountActions = document.getElementById('accountActions');
+        const proBadge = document.getElementById('proBadge');
+
+        if (this.user) {
+            document.getElementById('accountUserEmail').textContent = this.user.email;
+            document.getElementById('accountUserPlan').textContent = this.userPlan === 'pro' ? 'Pro' : 'Free';
+            proBadge.classList.toggle('hidden', !this.hasActiveSubscription);
+            document.getElementById('upgradeToProBtn').classList.toggle('hidden', this.hasActiveSubscription);
+            document.getElementById('upgrade-prompt').classList.toggle('hidden', this.hasActiveSubscription);
+            
+            const initials = this.user.email.slice(0, 2).toUpperCase();
+            document.getElementById('accountInitials').textContent = initials;
+            
+            loggedOutView.classList.add('hidden');
+            accountActions.classList.remove('hidden');
+        } else {
+            loggedOutView.classList.remove('hidden');
+            accountActions.classList.add('hidden');
+            this.showSignInForm();
+            proBadge.classList.add('hidden');
+        }
+    }
+
+    toggleAccountPopup(forceOpen = false) {
+        const popup = document.getElementById('accountPopup');
+        const overlay = document.getElementById('overlay');
+        if (forceOpen || popup.classList.contains('hidden')) {
+            popup.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            this.updateAccountPopupUI();
+        } else {
+            this.closeAccountPopup();
+        }
+    }
+    closeAccountPopup() {
+        document.getElementById('accountPopup').classList.add('hidden');
+        document.getElementById('overlay').classList.add('hidden');
+    }
+    showSignUpForm() {
+        document.getElementById('signInForm').classList.add('hidden');
+        document.getElementById('signUpForm').classList.remove('hidden');
+        document.getElementById('signInError').classList.add('hidden');
+    }
+    showSignInForm() {
+        document.getElementById('signUpForm').classList.add('hidden');
+        document.getElementById('signInForm').classList.remove('hidden');
+        document.getElementById('signUpError').classList.add('hidden');
+    }
+}
+
+// --- VISUALS & ANIMATIONS ---
+function initThreeJSBackground() {
+    const container = document.getElementById('canvas-container');
+    if (!container) return;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+    
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 100;
+    const posArray = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 10;
+    }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.05,
+        color: 0x50b1f7,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending
+    });
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+    camera.position.z = 3;
+
+    function animate() {
+        requestAnimationFrame(animate);
+        particlesMesh.rotation.x += 0.0005;
+        particlesMesh.rotation.y += 0.0005;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+        const newWidth = container.clientWidth;
+        const newHeight = container.clientHeight;
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(newWidth, newHeight);
+    });
+}
+
+function initAnimations() {
+    gsap.utils.toArray('.animate-fade-up').forEach(el => {
+        gsap.from(el, { y: 20, opacity: 0, duration: 0.8, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 80%", toggleActions: "play none none none" } });
+    });
+    gsap.utils.toArray('.card-hover').forEach((card, i) => {
+        gsap.from(card, { x: i % 2 === 0 ? -20 : 20, opacity: 0, duration: 0.6, delay: i * 0.1, ease: "back.out(1.7)", scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none none" } });
+    });
+}
+
+// --- GLOBAL FUNCTIONS ---
+function updateGoogleAuthUI(isAuthorized) {
+    const googleServiceLinks = document.querySelectorAll('.service-icon-link[data-is-google-service="true"]');
+    googleServiceLinks.forEach(link => {
+        const icon = link.querySelector('img');
+        const badge = link.querySelector('.status-badge');
+
+        icon.classList.toggle('grayscale', !isAuthorized);
+        icon.classList.toggle('opacity-70', !isAuthorized);
+        
+        if (badge) {
+            badge.classList.toggle('hidden', !isAuthorized);
+        }
+    });
+}
+
+async function handleServiceClick(service, isGoogleService, href) {
+    if (!authManager.user) {
+        authManager.toggleAccountPopup(true);
+        return;
+    }
+
+    const isProTool = service === 'image-generation' || service === 'speech-generation';
+    if (isProTool && !authManager.hasActiveSubscription) {
+        alert('This is a PRO feature. Please upgrade your account.');
+        authManager.toggleAccountPopup(true);
+        return;
+    }
+
+    if (isGoogleService) {
         const isGoogleAuthed = !!gapi.client.getToken()?.access_token;
         if (!isGoogleAuthed) {
             pendingService = service;
             tokenClient.requestAccessToken({ prompt: 'consent' });
             return;
         }
-        
-        authManager.showLoading(true);
-        window.location.href = `./dashboard/${service}/`;
     }
 
-    async function saveGoogleToken(tokenResponse) {
+    if (service === 'discord') {
+        authManager.showLoading(true);
+        try {
+            // Check if we already have a valid Discord token
+            const { data: discordToken, error } = await supabase
+                .from('user_discord_tokens')
+                .select('access_token, expires_at')
+                .eq('user_id', authManager.user.id)
+                .single();
+
+            if (error || !discordToken || new Date(discordToken.expires_at) <= new Date()) {
+                // No valid token, redirect to Discord auth
+                window.location.href = DISCORD_AUTH_URL;
+                return;
+            }
+
+            // We have a valid token, proceed to Discord tool
+            window.location.href = href;
+        } catch (error) {
+            console.error('Error checking Discord token:', error);
+            window.location.href = DISCORD_AUTH_URL;
+        } finally {
+            authManager.showLoading(false);
+        }
+        return;
+    }
+
+    authManager.showLoading(true);
+    window.location.href = href;
+}
+
+async function saveGoogleToken(tokenResponse) {
     if (!authManager.user) return;
 
-    // Set expires_at to 1 year from now
     const oneYearMs = 365 * 24 * 60 * 60 * 1000;
     const expires_at = new Date(Date.now() + oneYearMs).toISOString();
 
@@ -704,100 +832,104 @@
     if (error) console.error('Error saving Google token:', error);
 }
 
+async function loadGoogleToken() {
+    if (!authManager.user) {
+        updateGoogleAuthUI(false);
+        return;
+    }
 
-    async function loadGoogleToken() {
-        if (!authManager.user) {
-            updateGoogleAuthUI(false);
+    try {
+        const { data, error } = await supabase
+            .from('user_google_tokens')
+            .select('access_token, expires_at')
+            .eq('user_id', authManager.user.id);
+
+        if (error) {
+            console.error('Supabase error:', error);
             return;
         }
 
+        if (data && data.length > 0 && new Date(data[0].expires_at) > new Date()) {
+            gapi.client.setToken({ access_token: data[0].access_token });
+            updateGoogleAuthUI(true);
+        } else {
+            updateGoogleAuthUI(false);
+            if (data && data.length > 0) {
+                await supabase.from('user_google_tokens')
+                    .delete()
+                    .eq('user_id', authManager.user.id);
+            }
+        }
+    } catch (err) {
+        console.error('Failed to load Google token:', err);
+    }
+}
+
+// --- MAIN APP LOGIC ---
+document.addEventListener('DOMContentLoaded', () => {
+    authManager = new AuthManager();
+    
+    function gapiLoaded() {
+        gapi.load('client', initializeGapiClient);
+    }
+
+    async function initializeGapiClient() {
         try {
-            const { data, error } = await supabase
-                .from('user_google_tokens')
-                .select('access_token, expires_at')
-                .eq('user_id', authManager.user.id);
-
-            if (error) {
-                console.error('Supabase error:', error);
-                return;
-            }
-
-            if (data && data.length > 0 && new Date(data[0].expires_at) > new Date()) {
-                gapi.client.setToken({ access_token: data[0].access_token });
-                updateGoogleAuthUI(true);
-            } else {
-                updateGoogleAuthUI(false);
-                if (data && data.length > 0) {
-                    await supabase.from('user_google_tokens')
-                        .delete()
-                        .eq('user_id', authManager.user.id);
-                }
-            }
-        } catch (err) {
-            console.error('Failed to load Google token:', err);
+            await gapi.client.init({
+                apiKey: deobfuscate(GOOGLE_API_KEY_OBFUSCATED),
+                discoveryDocs: DISCOVERY_DOCS,
+            });
+            const gisScript = document.createElement('script');
+            gisScript.src = 'https://accounts.google.com/gsi/client';
+            gisScript.async = true;
+            gisScript.defer = true;
+            gisScript.onload = gisLoaded;
+            document.body.appendChild(gisScript);
+        } catch (error) {
+            console.error("Error initializing GAPI client:", error);
         }
     }
 
-    // --- MAIN APP LOGIC ---
-    document.addEventListener('DOMContentLoaded', () => {
-        authManager = new AuthManager();
-        
-        function gapiLoaded() {
-            gapi.load('client', initializeGapiClient);
-        }
+    function gisLoaded() {
+        tokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: deobfuscate(GOOGLE_CLIENT_ID_OBFUSCATED),
+            scope: SCOPES,
+            callback: async (tokenResponse) => {
+                if (tokenResponse && tokenResponse.access_token) {
+                    await saveGoogleToken(tokenResponse);
+                    gapi.client.setToken(tokenResponse);
+                    updateGoogleAuthUI(true);
 
-        async function initializeGapiClient() {
-            try {
-                await gapi.client.init({
-                    apiKey: deobfuscate(GOOGLE_API_KEY_OBFUSCATED),
-                    discoveryDocs: DISCOVERY_DOCS,
-                });
-                const gisScript = document.createElement('script');
-                gisScript.src = 'https://accounts.google.com/gsi/client';
-                gisScript.async = true;
-                gisScript.defer = true;
-                gisScript.onload = gisLoaded;
-                document.body.appendChild(gisScript);
-            } catch (error) {
-                console.error("Error initializing GAPI client:", error);
-            }
-        }
-
-        function gisLoaded() {
-            tokenClient = google.accounts.oauth2.initTokenClient({
-                client_id: deobfuscate(GOOGLE_CLIENT_ID_OBFUSCATED),
-                scope: SCOPES,
-                callback: async (tokenResponse) => {
-                    if (tokenResponse && tokenResponse.access_token) {
-                        await saveGoogleToken(tokenResponse);
-                        gapi.client.setToken(tokenResponse);
-                        updateGoogleAuthUI(true);
-
-                        if (pendingService) {
-                            handleServiceClick(pendingService);
-                            pendingService = null;
-                        }
-                    } else {
-                        console.error("Invalid token response:", tokenResponse);
+                    if (pendingService) {
+                        const serviceLink = document.querySelector(`.service-icon-link[data-service='${pendingService}']`);
+                        const href = serviceLink.dataset.isGoogleService === 'true' ? `./dashboard/${pendingService}/` : serviceLink.getAttribute('href');
+                        handleServiceClick(pendingService, true, href);
+                        pendingService = null;
                     }
-                },
-            });
-            authManager.initializeAuth().then(() => {
-                if (authManager.user) {
-                    loadGoogleToken();
+                } else {
+                    console.error("Invalid token response:", tokenResponse);
                 }
-            });
-        }
+            },
+        });
+        authManager.initializeAuth().then(() => {
+            if (authManager.user) {
+                loadGoogleToken();
+            }
+        });
+    }
 
-        window.onload = gapiLoaded;
-        
-        document.querySelectorAll('.service-icon-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                handleServiceClick(link.dataset.service);
-            });
+    window.onload = gapiLoaded;
+    
+    document.querySelectorAll('.service-icon-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const service = link.dataset.service;
+            const isGoogleService = link.dataset.isGoogleService === 'true';
+            const href = isGoogleService ? `./dashboard/${service}/` : link.getAttribute('href');
+            handleServiceClick(service, isGoogleService, href);
         });
     });
+});
 </script>
 </body>
 </html>

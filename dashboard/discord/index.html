@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit - Discord Tool</title>
+    
+    <link rel="icon" href="https://nicholasxdavis.github.io/docs/img/orbit.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../javascript/tailwind-config.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body { background-color: #161618; color: #fcfcfc; }
+        .glassmorphism { background: rgba(22, 22, 24, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(36, 38, 40, 0.5); }
+        .btn-micro:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(6, 178, 252, 0.3); }
+        .hidden { display: none; }
+        .custom-textarea { background: #242628; border: 1px solid #3a3c3e; transition: all 0.3s ease; }
+        .custom-textarea:focus { border-color: #50b1f7; box-shadow: 0 0 0 2px rgba(6, 178, 252, 0.2); }
+        .toggle-checkbox:checked { right: 0; border-color: #8b5cf6; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #8b5cf6; }
+        .loader { width: 50px; aspect-ratio: 1; box-shadow: 0 0 0 3px #8b5cf6 inset; border-radius: 50%; position: relative; animation: l6 1.5s linear infinite; }
+        .loader:before { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); box-shadow: inherit; width: 25px; aspect-ratio: 1; border-radius: 50%; }
+        @keyframes l6 { to { transform: rotate(360deg); } }
+        .server-card { transition: all 0.2s ease; }
+        .server-card:hover { transform: translateY(-2px); background: rgba(36, 38, 40, 0.8); }
+        .channel-tag { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 9999px; }
+    </style>
+</head>
+<body class="font-sans antialiased bg-dark-primary text-dark-light min-h-screen">
+    <div class="container mx-auto px-4 md:px-8 py-6">
+        <header class="flex justify-between items-center mb-8 animate-fade-up">
+            <div class="flex items-center gap-3">
+                <img src="https://nicholasxdavis.github.io/docs/img/logo.png" alt="Orbit Logo" class="w-20 h-100%">
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="../../" class="bg-dark-secondary text-dark-light font-medium py-2 px-4 rounded-lg hover:bg-dark-light/10 transition-all flex items-center gap-2 btn-micro">
+                    &larr; Back to Workspace
+                </a>
+            </div>
+        </header>
+
+        <div id="app-content" class="hidden animate-fade-up" style="animation-delay: 0.1s">
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Servers</p>
+                            <h3 id="servers-count" class="text-2xl font-bold">--</h3>
+                        </div>
+                        <div class="bg-[#8b5cf6]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#8b5cf6]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Active Members</p>
+                            <h3 id="members-count" class="text-2xl font-bold">--</h3>
+                        </div>
+                        <div class="bg-[#10b981]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#10b981]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Messages (24h)</p>
+                            <h3 id="messages-count" class="text-2xl font-bold">--</h3>
+                        </div>
+                        <div class="bg-[#f59e0b]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#f59e0b]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glassmorphism p-4 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-dark-tertiary text-sm">Most Active</p>
+                            <h3 id="active-server" class="text-xl font-bold truncate">--</h3>
+                        </div>
+                        <div class="bg-[#06b2fc]/10 p-3 rounded-full">
+                            <svg class="w-6 h-6 text-[#06b2fc]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="glassmorphism p-6 rounded-xl">
+                    <h3 class="font-semibold mb-4">Message Volume (24h)</h3>
+                    <canvas id="volumeChart" height="250"></canvas>
+                </div>
+                
+                <div class="glassmorphism p-6 rounded-xl">
+                    <h3 class="font-semibold mb-4">Server Distribution</h3>
+                    <canvas id="serverChart" height="250"></canvas>
+                </div>
+            </div>
+            
+            <!-- Server Management -->
+            <div class="glassmorphism p-6 rounded-xl mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold">Server Management</h3>
+                    <div class="flex items-center gap-2">
+                        <select id="server-filter" class="bg-dark-secondary text-dark-light text-sm rounded px-2 py-1">
+                            <option value="all">All Servers</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="server-list" class="space-y-3">
+                    <!-- Servers will be loaded here -->
+                    <div class="text-center py-12 text-dark-tertiary">
+                        <p>Loading servers...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Analyzer -->
+            <div class="glassmorphism p-6 rounded-xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold">AI Server Analyzer</h3>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-dark-tertiary">Analyze</span>
+                        <select id="analyze-period" class="bg-dark-secondary text-dark-light text-sm rounded px-2 py-1">
+                            <option value="1">Last 24 hours</option>
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <button id="analyze-summary-btn" class="bg-[#8b5cf6] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#7c4dff] transition-all">
+                        Server Summary
+                    </button>
+                    <button id="analyze-trends-btn" class="bg-[#06b2fc] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#0595d8] transition-all">
+                        Identify Trends
+                    </button>
+                    <button id="analyze-actions-btn" class="bg-[#10b981] text-white font-medium py-2 px-4 rounded-lg hover:bg-[#0d9e6e] transition-all">
+                        Action Items
+                    </button>
+                </div>
+                
+                <div class="bg-dark-secondary rounded-lg p-4 min-h-48">
+                    <div id="analyzer-placeholder" class="text-center text-dark-tertiary py-12">
+                        <svg class="w-12 h-12 mx-auto mb-3 text-[#8b5cf6]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                        <p>Select an analysis option above to generate insights</p>
+                    </div>
+                    <div id="analyzer-results" class="hidden">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 id="analysis-title" class="font-medium"></h4>
+                            <button id="copy-analysis-btn" class="text-[#8b5cf6] hover:underline text-sm flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <div id="analysis-content" class="prose prose-invert max-w-none text-sm"></div>
+                    </div>
+                    <div id="analyzer-loading" class="hidden text-center py-12">
+                        <div class="loader mx-auto"></div>
+                        <p class="mt-4 text-[#8b5cf6]">Analyzing server data...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="auth-prompt" class="hidden text-center p-10 mt-16">
+             <h2 class="text-2xl font-bold mb-4">Authentication Required</h2>
+             <p class="mb-6 text-dark-tertiary">Please sign in and connect your Discord account from the main workspace to use this tool.</p>
+             <a href="../../" class="bg-[#8b5cf6] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#7c4dff] transition-all">
+                Go to Workspace
+            </a>
+        </div>
+    </div>
+
+    <div id="loading-skeleton" class="fixed inset-0 bg-dark-primary/90 z-[2000] flex items-center justify-center">
+        <div class="loader"></div>
+    </div>
+
+    <script src="../../javascript/tools/discord.js"></script>
+</body>
+</html>
